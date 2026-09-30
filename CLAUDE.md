@@ -3,6 +3,12 @@
 Projeto de gestão de templates WhatsApp Business API (WABA) e materiais de
 comunicação para a clínica Master Clinic.
 
+**Repositório:** https://github.com/tiagolau/MasterClinic (**privado**). Ficam fora do git
+(`.gitignore`): `data/` e `logs/` (dados de pacientes), `*.csv`, `.env`, `.venv` e
+`dc-monitor/*.dc` (tokens uazapi embutidos). **Nunca commitar token** — segredos vão no
+`~/.claude/.env` (ex.: `UAZAPI_TOKEN_MASTERCLINIC_{MESQUITA,GERENCIA,FINANCEIRO}`). O deploy na
+VPS Tecminas continua por `scp`, não por `git pull`.
+
 ## Stack
 
 - **Python 3** para scripts de submissão WABA
