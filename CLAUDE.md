@@ -170,7 +170,12 @@ ver [ADR 011](docs/decisions/011-identidade-visual-painel.md).
   Status da agenda em `GET /appointment/status_list` (`CONFIRMED`, `CHECKOUT` = Atendido,
   `MISSED` = Faltou etc.); cada agendamento tem `StatusId` e `z_LastChange_Date`.
 
-### Sync Clinicorp → DataCrazy (cron na VPS Tecminas)
+### Sync Clinicorp → DataCrazy (cron na VPS Tecminas) — ⏸️ PAUSADO desde 2026-09-30
+
+**Pausado a pedido em 2026-09-30** (último ciclo 18:40). A linha do cron está comentada em
+`/etc/cron.d/sync_clinicorp_datacrazy` (backup em `/root/sync_clinicorp_datacrazy.cron.bak`);
+reativar tirando o `#`. Script, cache e log continuam na VPS.
+
 
 [`scripts/cron_sync_clinicorp_datacrazy.py`](scripts/cron_sync_clinicorp_datacrazy.py), a cada
 10 min em `/etc/cron.d/sync_clinicorp_datacrazy`, log em `/var/log/clinicorp_datacrazy_sync.log`.

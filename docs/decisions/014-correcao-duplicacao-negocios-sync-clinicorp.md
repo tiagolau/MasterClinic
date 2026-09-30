@@ -131,3 +131,6 @@ Verificação feita no mesmo dia, depois do deploy:
   limpos, o sync move o mais antigo de cada grupo e os clones ficam parados.
 - Leitura com falha agora atrasa a sincronização daquele paciente em um ciclo
   (10 min), em vez de gerar duplicado.
+- **2026-09-30 — cron pausado a pedido** (sync não é mais necessário). Linha comentada em
+  `/etc/cron.d/sync_clinicorp_datacrazy`, último ciclo às 18:40, confirmado que não rodou às 18:50.
+  Para reativar, tirar o `#` da linha. Os 169 duplicados de 24/09 não foram limpos.
