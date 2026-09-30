@@ -1,0 +1,192 @@
+{
+  "_meta": {
+    "waba_id": "105152822451126",
+    "business_id": "476121126154261",
+    "criado_em": "2026-05-26",
+    "padrao_variaveis": "numeradas ({{1}}, {{2}})",
+    "observacao": "Templates novos sem header de midia ou com VIDEO via Veo 2. Templates que exigem URL/telefone reais foram pulados ate dados serem confirmados."
+  },
+  "templates": [
+    {
+      "_id_interno": "T01",
+      "_esqueleto": "3 (Confirmacao agendamento)",
+      "_risco": "Baixo",
+      "name": "masterclinic_confirma_consulta",
+      "language": "pt_BR",
+      "category": "UTILITY",
+      "components": [
+        { "type": "HEADER", "format": "TEXT", "text": "Confirmacao de consulta — {{1}}", "example": { "header_text": ["amanha as 14h"] } },
+        { "type": "BODY", "text": "Ola {{1}}, registramos sua consulta na Master Clinic. Pedimos que confirme sua presenca para garantirmos o atendimento.\n\nCaso precise reagendar, basta responder aqui.", "example": { "body_text": [["Carlos"]] } },
+        { "type": "FOOTER", "text": "Master Clinic — Atendimento" },
+        { "type": "BUTTONS", "buttons": [ { "type": "QUICK_REPLY", "text": "Confirmo presenca" }, { "type": "QUICK_REPLY", "text": "Preciso reagendar" } ] }
+      ]
+    },
+    {
+      "_id_interno": "T04",
+      "_esqueleto": "6 (Body longo institucional, sem header)",
+      "_risco": "Muito baixo",
+      "name": "masterclinic_retorno_periodico",
+      "language": "pt_BR",
+      "category": "UTILITY",
+      "components": [
+        { "type": "BODY", "text": "Ola {{1}},\n\nverificamos em nosso sistema que o seu acompanhamento de {{2}} na Master Clinic esta com revisao periodica em aberto. Para mantermos seu historico em dia e garantir a continuidade do cuidado dentro do prazo recomendado, precisamos da sua confirmacao.\n\nVoce pode responder por aqui mesmo. Nossa equipe esta disponivel para te orientar nos proximos passos.", "example": { "body_text": [["Ana", "rotina clinica"]] } },
+        { "type": "FOOTER", "text": "Master Clinic — Atendimento" },
+        { "type": "BUTTONS", "buttons": [ { "type": "QUICK_REPLY", "text": "Quero agendar" }, { "type": "QUICK_REPLY", "text": "Nao tenho mais interesse" } ] }
+      ]
+    },
+    {
+      "_id_interno": "T05",
+      "_esqueleto": "1 (Casca universal, header VIDEO)",
+      "_risco": "Baixo",
+      "_precisa_video": true,
+      "name": "masterclinic_utilidade_01",
+      "language": "pt_BR",
+      "category": "UTILITY",
+      "components": [
+        { "type": "HEADER", "format": "VIDEO", "example": { "header_handle": ["__HANDLE_VIDEO_RECEPCAO__"] } },
+        { "type": "BODY", "text": "Ola {{1}}!\n\n{{2}}\n\n{{3}}\n\nFico no aguardo da sua confirmacao", "example": { "body_text": [["Tiago", "Sua ficha de atendimento foi atualizada", "Posso te enviar os detalhes?"]] } },
+        { "type": "BUTTONS", "buttons": [ { "type": "QUICK_REPLY", "text": "Confirmar" }, { "type": "QUICK_REPLY", "text": "Bloquear contato" } ] }
+      ]
+    },
+    {
+      "_id_interno": "T06",
+      "_esqueleto": "5 (Atualizacao sem variaveis, sem header)",
+      "_risco": "Muito baixo",
+      "name": "masterclinic_atualizacao_cadastro",
+      "language": "pt_BR",
+      "category": "UTILITY",
+      "components": [
+        { "type": "BODY", "text": "Identificamos uma atualizacao importante no seu cadastro na Master Clinic. Para que possamos seguir, precisamos apenas de uma confirmacao sua.\n\nVoce pode responder por aqui quando puder." },
+        { "type": "BUTTONS", "buttons": [ { "type": "QUICK_REPLY", "text": "Pode prosseguir" } ] }
+      ]
+    },
+    {
+      "_id_interno": "T07",
+      "_esqueleto": "6 (Body longo, sem header)",
+      "_risco": "Muito baixo",
+      "name": "masterclinic_retorno_4_meses",
+      "language": "pt_BR",
+      "category": "UTILITY",
+      "components": [
+        { "type": "BODY", "text": "Ola {{1}},\n\nverificamos em nosso sistema que sua ultima consulta na Master Clinic foi em {{2}}. Pelo seu protocolo de acompanhamento, o retorno em 4 meses esta previsto para este periodo.\n\nPara mantermos a continuidade do seu tratamento, podemos ja reservar um horario. Basta responder por aqui.", "example": { "body_text": [["Ana", "janeiro de 2026"]] } },
+        { "type": "FOOTER", "text": "Master Clinic — Atendimento" },
+        { "type": "BUTTONS", "buttons": [ { "type": "QUICK_REPLY", "text": "Quero agendar retorno" }, { "type": "QUICK_REPLY", "text": "Prefiro outro momento" } ] }
+      ]
+    },
+    {
+      "_id_interno": "T08",
+      "_esqueleto": "8 (Alerta prazo 4 variaveis, sem header)",
+      "_risco": "Baixo",
+      "name": "masterclinic_retorno_segunda_etapa",
+      "language": "pt_BR",
+      "category": "UTILITY",
+      "components": [
+        { "type": "BODY", "text": "Ola {{1}}, identificamos que sua {{2}} na Master Clinic esta com a segunda etapa prevista para {{3}}. Para darmos continuidade, podemos {{4}} agora mesmo.\n\nFico no aguardo da sua resposta.", "example": { "body_text": [["Rafael", "sequencia de tratamento", "as proximas duas semanas", "reservar seu horario"]] } },
+        { "type": "BUTTONS", "buttons": [ { "type": "QUICK_REPLY", "text": "Pode agendar" }, { "type": "QUICK_REPLY", "text": "Preciso reagendar" }, { "type": "QUICK_REPLY", "text": "Pode encerrar" } ] }
+      ]
+    },
+    {
+      "_id_interno": "T09",
+      "_esqueleto": "Composto (aniversariante enquadrado como verificacao de cadastro)",
+      "_risco": "Medio",
+      "name": "masterclinic_aniversariante",
+      "language": "pt_BR",
+      "category": "UTILITY",
+      "components": [
+        { "type": "BODY", "text": "Ola {{1}},\n\naqui e da equipe da Master Clinic. Em nossa verificacao periodica de cadastro, identificamos que hoje e uma data especial para voce.\n\nO Dr. Wilton e a equipe registraram aqui os votos de um bom dia. Caso queira aproveitar para revisar seu acompanhamento conosco, basta responder por aqui.", "example": { "body_text": [["Carla"]] } },
+        { "type": "FOOTER", "text": "Master Clinic — Atendimento" },
+        { "type": "BUTTONS", "buttons": [ { "type": "QUICK_REPLY", "text": "Obrigado(a)" }, { "type": "QUICK_REPLY", "text": "Quero revisar acompanhamento" } ] }
+      ]
+    },
+    {
+      "_id_interno": "T10",
+      "_esqueleto": "1 adaptado (casca Dr. Wilton, header VIDEO)",
+      "_risco": "Baixo",
+      "_precisa_video": true,
+      "name": "masterclinic_paciente_em_tratamento",
+      "language": "pt_BR",
+      "category": "UTILITY",
+      "components": [
+        { "type": "HEADER", "format": "VIDEO", "example": { "header_handle": ["__HANDLE_VIDEO_DR_WILTON__"] } },
+        { "type": "BODY", "text": "Ola {{1}}!\n\n{{2}}\n\n{{3}}\n\nFico no aguardo da sua resposta", "example": { "body_text": [["Marcos", "Estou passando para acompanhar a evolucao do seu tratamento na Master Clinic", "Como esta se sentindo desde a ultima sessao?"]] } },
+        { "type": "BUTTONS", "buttons": [ { "type": "QUICK_REPLY", "text": "Esta tudo bem" }, { "type": "QUICK_REPLY", "text": "Preciso de orientacao" } ] }
+      ]
+    },
+    {
+      "_id_interno": "T12",
+      "_esqueleto": "2 (Notificacao curta sem header)",
+      "_risco": "Muito baixo",
+      "name": "masterclinic_envio_localizacao",
+      "language": "pt_BR",
+      "category": "UTILITY",
+      "components": [
+        { "type": "BODY", "text": "Ola {{1}}, para facilitar seu deslocamento ate a Master Clinic, podemos enviar a localizacao exata pelo WhatsApp. Posso enviar agora?", "example": { "body_text": [["Joao"]] } },
+        { "type": "BUTTONS", "buttons": [ { "type": "QUICK_REPLY", "text": "Pode enviar" }, { "type": "QUICK_REPLY", "text": "Ja tenho o endereco" } ] }
+      ]
+    },
+    {
+      "_id_interno": "T13",
+      "_esqueleto": "Composto (fim de processo)",
+      "_risco": "Baixo",
+      "name": "masterclinic_agradecimento",
+      "language": "pt_BR",
+      "category": "UTILITY",
+      "components": [
+        { "type": "BODY", "text": "Ola {{1}}, registramos a finalizacao do seu atendimento na Master Clinic.\n\nO Dr. Wilton e a equipe agradecem a confianca. Caso surja qualquer duvida sobre as orientacoes passadas, basta responder por aqui.", "example": { "body_text": [["Lucia"]] } },
+        { "type": "BUTTONS", "buttons": [ { "type": "QUICK_REPLY", "text": "Tudo certo" }, { "type": "QUICK_REPLY", "text": "Tenho uma duvida" } ] }
+      ]
+    },
+    {
+      "_id_interno": "T14",
+      "_esqueleto": "5 adaptado (aviso horario funcionamento)",
+      "_risco": "Muito baixo",
+      "name": "masterclinic_final_de_semana",
+      "language": "pt_BR",
+      "category": "UTILITY",
+      "components": [
+        { "type": "BODY", "text": "Ola {{1}}, informamos que nesta sexta-feira nosso atendimento na Master Clinic encerra as {{2}}, retornando na segunda-feira a partir das {{3}}.\n\nEm caso de urgencia durante o final de semana, basta responder por aqui que direcionamos seu contato.", "example": { "body_text": [["Pedro", "18h", "8h"]] } },
+        { "type": "BUTTONS", "buttons": [ { "type": "QUICK_REPLY", "text": "Entendi" }, { "type": "QUICK_REPLY", "text": "Tenho uma urgencia" } ] }
+      ]
+    },
+    {
+      "_id_interno": "T15",
+      "_esqueleto": "3 adaptado (no-show com header TEXT)",
+      "_risco": "Muito baixo",
+      "name": "masterclinic_ausencia_no_show",
+      "language": "pt_BR",
+      "category": "UTILITY",
+      "components": [
+        { "type": "HEADER", "format": "TEXT", "text": "Consulta nao realizada — {{1}}", "example": { "header_text": ["ontem as 14h"] } },
+        { "type": "BODY", "text": "Ola {{1}}, registramos que sua consulta na Master Clinic prevista nao foi realizada. Para que possamos reservar um novo horario e manter seu acompanhamento em dia, basta nos confirmar por aqui.", "example": { "body_text": [["Bruno"]] } },
+        { "type": "FOOTER", "text": "Master Clinic — Atendimento" },
+        { "type": "BUTTONS", "buttons": [ { "type": "QUICK_REPLY", "text": "Quero reagendar" }, { "type": "QUICK_REPLY", "text": "Nao quero mais" } ] }
+      ]
+    },
+    {
+      "_id_interno": "T16",
+      "_esqueleto": "6 adaptado (instrucoes pre-consulta)",
+      "_risco": "Muito baixo",
+      "name": "masterclinic_primeira_consulta",
+      "language": "pt_BR",
+      "category": "UTILITY",
+      "components": [
+        { "type": "BODY", "text": "Ola {{1}}, sua primeira consulta na Master Clinic esta confirmada para {{2}}.\n\nPara agilizar seu atendimento, pedimos que chegue com 15 minutos de antecedencia e traga documento com foto e exames recentes, se houver.\n\nCaso precise reagendar ou tirar alguma duvida antes do dia, basta responder por aqui.", "example": { "body_text": [["Patricia", "quinta-feira as 10h"]] } },
+        { "type": "FOOTER", "text": "Master Clinic — Atendimento" },
+        { "type": "BUTTONS", "buttons": [ { "type": "QUICK_REPLY", "text": "Confirmo presenca" }, { "type": "QUICK_REPLY", "text": "Tenho uma duvida" }, { "type": "QUICK_REPLY", "text": "Preciso reagendar" } ] }
+      ]
+    },
+    {
+      "_id_interno": "T17",
+      "_esqueleto": "6 (followup com escassez operacional)",
+      "_risco": "Baixo",
+      "name": "masterclinic_followup_fechamento_consulta",
+      "language": "pt_BR",
+      "category": "UTILITY",
+      "components": [
+        { "type": "BODY", "text": "Ola {{1}}, em nossa verificacao de agenda da Master Clinic, identificamos que seu agendamento para {{2}} ficou com a confirmacao em aberto.\n\nPara que possamos garantir seu horario antes que ele seja liberado para a fila de espera, precisamos da sua confirmacao final.\n\nVoce pode responder por aqui mesmo.", "example": { "body_text": [["Renato", "consulta de avaliacao inicial"]] } },
+        { "type": "FOOTER", "text": "Master Clinic — Atendimento" },
+        { "type": "BUTTONS", "buttons": [ { "type": "QUICK_REPLY", "text": "Confirmo o horario" }, { "type": "QUICK_REPLY", "text": "Preciso de outro horario" }, { "type": "QUICK_REPLY", "text": "Nao quero mais" } ] }
+      ]
+    }
+  ]
+}

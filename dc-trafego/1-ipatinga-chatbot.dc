@@ -1,0 +1,704 @@
+{
+  "id": "f43be646-f48d-4839-8a91-4521210ed79e",
+  "createdAt": "2026-07-29T12:00:00.000Z",
+  "name": "Ipatinga · Lead → Avaliação Agendada",
+  "version": 1,
+  "active": false,
+  "notes": [
+    {
+      "id": "ff1e8e84-f2ef-43d0-a18e-b9133df328a1",
+      "options": {
+        "text": "🦷 IPATINGA · LEAD → AVALIAÇÃO AGENDADA\n\nCanal: Oficial Master Clinic\nGatilho: NEGÓCIO CRIADO na etapa Agendamento (Entrada) de 'Funil Principal - Ipatinga'\n  (o fluxo anterior já identifica a origem, cria o lead e abre o\n   card — se o card nasceu, o lead mandou mensagem)\n\nESTRATÉGIA: vender a AVALIAÇÃO, não o tratamento.\nO único objetivo é ocupar uma cadeira na agenda.\n\nTRILHO — só avança por BOTÃO:\n  1. Acolhida + 'como podemos cuidar do seu sorriso?'\n       Dor → handoff imediato 🔴\n       Tratamento → o que quer resolver\n       Filho → acolhimento\n  2. VALOR da avaliação (examina, tira dúvidas, monta o plano)\n  3. Fechamento por alternativa: manhã / tarde / tanto faz\n  4. Viabilidade: 'fica tranquilo chegar aqui?'\n       Outra cidade → 'consegue vir?' → Não = PERDIDO\n  5. HANDOFF: permanece em Agendamento (Entrada) + notifica + PARA o bot\n\n⚠️ O BOT NÃO FALA:\n  • convênio / Brasil Sorridente — é OBJEÇÃO, trata só se o\n    lead levantar, e quem trata é o humano\n  • preço, parcelamento — só o doutor, na consulta\n  • nunca manda áudio, nunca agenda sozinho\n\n⚠️ AO IMPORTAR:\n  • selecionar o canal 'Oficial Master Clinic' em TODOS os blocos de mensagem\n  • conferir se o gatilho aponta para a etapa Agendamento (Entrada) de 'Funil Principal - Ipatinga'\n  • importar também o .dc de RESGATE desta unidade\n  • ativar só após testar com o próprio número",
+        "color": "#bae6fd",
+        "width": 560,
+        "height": 700
+      },
+      "presentation": {
+        "x": -700,
+        "y": -200
+      }
+    }
+  ],
+  "blocks": [
+    {
+      "id": "6e40569e-0c77-4ecc-b67e-75be10527153",
+      "type": "trigger",
+      "sourceBlockId": null,
+      "options": {
+        "triggers": [
+          {
+            "name": "business-created-trigger",
+            "group": "business",
+            "options": {
+              "stageId": "fa389511-0857-43ca-88cf-58bf2f2c83fa"
+            }
+          }
+        ],
+        "nextBlockId": "3c6a199d-1200-43e2-b70c-282078745726"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 0
+      }
+    },
+    {
+      "id": "1a625128-c3a4-4ec5-b1c7-f0a3360ae97b",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "6398a89f-3325-4070-8061-a2769ccdc7b7",
+            "options": {
+              "text": "Enquanto isso, já nos segue no Instagram? 😁\n\n@masterclinicipatinga\n@dradaniellecarvalho\n@drwiltonvargas.dentista",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "WHATSAPP",
+        "provider": "WHATSAPP_CLOUD_API",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 200,
+        "y": 3500
+      }
+    },
+    {
+      "id": "d7827991-9808-4467-922f-a710a198e174",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "6570903b-92e9-4465-af46-1e3a960eba87",
+            "options": {
+              "text": "Prontinho! ✨\n\nJá passei tudo para a nossa recepção — ela vai confirmar o melhor horário com você aqui mesmo, em instantes.\n\n📍 Av. Brasil, nº 685 — Iguaçu, Ipatinga\n🗓️ Segunda a sexta, de 08:00 às 12:30 e 13:30 às 18:30",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "WHATSAPP",
+        "provider": "WHATSAPP_CLOUD_API",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "1a625128-c3a4-4ec5-b1c7-f0a3360ae97b",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 200,
+        "y": 3150
+      }
+    },
+    {
+      "id": "6cafa873-055d-48e3-a0e8-aa947ba8a244",
+      "type": "action",
+      "sourceBlockId": null,
+      "options": {
+        "actions": [
+          {
+            "name": "add-tag-action",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "7309d983-fefa-4b83-93be-fe1d7b2131c0",
+                "09e51ab5-96ab-4955-bf61-cf13120bd880",
+                "e424604f-2966-4722-9339-c8b35d887a7f"
+              ],
+              "tagName": ""
+            }
+          },
+          {
+            "name": "move-business-action",
+            "group": "business",
+            "options": {
+              "stageId": "fa389511-0857-43ca-88cf-58bf2f2c83fa"
+            }
+          },
+          {
+            "name": "send-notification-action",
+            "group": "system",
+            "options": {
+              "notification": "🟢 LEAD QUALIFICADO — unidade Ipatinga. Quer avaliação, já escolheu turno e confirmou que consegue vir. Fechar o horário.",
+              "url": "",
+              "attendantsIds": []
+            }
+          },
+          {
+            "name": "stop-chat-automations-action",
+            "group": "messages",
+            "options": {
+              "type": "current-conversation",
+              "instanceId": ""
+            }
+          }
+        ],
+        "nextBlockId": "d7827991-9808-4467-922f-a710a198e174"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 2800
+      }
+    },
+    {
+      "id": "44a17dd7-e5df-47d6-80ac-19b4fe5666a9",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "bedc2887-83f7-4955-8289-4641027968d3",
+            "options": {
+              "text": "Poxa, dor de dente não dá sossego mesmo 🛑\n\nJá estou avisando a recepção pra te encaixar o quanto antes. Fica aqui comigo que já te respondem!",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "WHATSAPP",
+        "provider": "WHATSAPP_CLOUD_API",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 1100,
+        "y": 1400
+      }
+    },
+    {
+      "id": "24196bf7-a8ca-48dd-bc07-1fc8398b6400",
+      "type": "action",
+      "sourceBlockId": null,
+      "options": {
+        "actions": [
+          {
+            "name": "add-tag-action",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "cc8ae801-9bd3-413a-b0d6-ff47cb990f84",
+                "09e51ab5-96ab-4955-bf61-cf13120bd880",
+                "7309d983-fefa-4b83-93be-fe1d7b2131c0"
+              ],
+              "tagName": ""
+            }
+          },
+          {
+            "name": "move-business-action",
+            "group": "business",
+            "options": {
+              "stageId": "fa389511-0857-43ca-88cf-58bf2f2c83fa"
+            }
+          },
+          {
+            "name": "send-notification-action",
+            "group": "system",
+            "options": {
+              "notification": "🔴 URGÊNCIA / DOR — unidade Ipatinga. Encaixar o quanto antes.",
+              "url": "",
+              "attendantsIds": []
+            }
+          },
+          {
+            "name": "stop-chat-automations-action",
+            "group": "messages",
+            "options": {
+              "type": "current-conversation",
+              "instanceId": ""
+            }
+          }
+        ],
+        "nextBlockId": "44a17dd7-e5df-47d6-80ac-19b4fe5666a9"
+      },
+      "presentation": {
+        "x": 1100,
+        "y": 1050
+      }
+    },
+    {
+      "id": "39b89baa-ae78-41dd-8d6c-af02c127b736",
+      "type": "action",
+      "sourceBlockId": null,
+      "options": {
+        "actions": [
+          {
+            "name": "add-tag-action",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "81db8417-cae7-4291-8098-3c44cb272db8"
+              ],
+              "tagName": ""
+            }
+          },
+          {
+            "name": "lose-business-action",
+            "group": "business",
+            "options": {
+              "lossReasonId": "",
+              "justification": "Fora da região — não consegue se deslocar até a unidade"
+            }
+          },
+          {
+            "name": "stop-chat-automations-action",
+            "group": "messages",
+            "options": {
+              "type": "current-conversation",
+              "instanceId": ""
+            }
+          }
+        ],
+        "nextBlockId": ""
+      },
+      "presentation": {
+        "x": 1500,
+        "y": 2800
+      }
+    },
+    {
+      "id": "62110daa-8d35-4c08-ac5a-37308776d353",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "b51425be-c875-4d90-9bf3-0e1a174eb23f",
+            "options": {
+              "text": "Imagino, sem problema! 💚 Agradeço demais o seu contato.\n\nSe um dia estiver aqui pela região, vai ser um prazer te atender. Fica com Deus! 🙏🏼",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "WHATSAPP",
+        "provider": "WHATSAPP_CLOUD_API",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "39b89baa-ae78-41dd-8d6c-af02c127b736",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 1500,
+        "y": 2450
+      }
+    },
+    {
+      "id": "2988da12-c4d4-40a4-babf-54f091d5e5a7",
+      "type": "action",
+      "sourceBlockId": null,
+      "options": {
+        "actions": [
+          {
+            "name": "add-tag-action",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "cc8ae801-9bd3-413a-b0d6-ff47cb990f84"
+              ],
+              "tagName": ""
+            }
+          }
+        ],
+        "nextBlockId": "6cafa873-055d-48e3-a0e8-aa947ba8a244"
+      },
+      "presentation": {
+        "x": 1100,
+        "y": 2800
+      }
+    },
+    {
+      "id": "89a771e0-a68a-4402-b961-ff6d3dd565b1",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "a736c081-1f50-4df7-8d8d-9fe0a44830da",
+            "options": {
+              "text": "Entendi! Temos pacientes que vêm de outras cidades, principalmente para implante e prótese — nesses casos a gente organiza o tratamento em menos visitas, pra compensar a viagem.\n\nVocê conseguiria vir até Ipatinga (MG)?\n\n👇 *Toque em uma das opções abaixo*",
+              "buttons": [
+                {
+                  "id": "5cd848d9-6bb7-469f-9c88-532a974bc562",
+                  "text": "Sim, consigo ir",
+                  "type": "button",
+                  "nextBlockId": "2988da12-c4d4-40a4-babf-54f091d5e5a7"
+                },
+                {
+                  "id": "d3d0f376-817f-4090-a3de-6cadc79da250",
+                  "text": "Não, é longe demais",
+                  "type": "button",
+                  "nextBlockId": "62110daa-8d35-4c08-ac5a-37308776d353"
+                }
+              ],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "WHATSAPP",
+        "provider": "WHATSAPP_CLOUD_API",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 1100,
+        "y": 2450
+      }
+    },
+    {
+      "id": "e931f7da-e653-4d55-8057-7c6ade3d8c0a",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "a2dcfaf9-2d5f-427c-aba3-eda123aae39d",
+            "options": {
+              "text": "Perfeito! Nossa unidade fica em *Av. Brasil, nº 685 — Iguaçu, Ipatinga* 📍\n\nFica tranquilo pra você chegar até aqui?\n\n👇 *Toque em uma das opções abaixo*",
+              "buttons": [
+                {
+                  "id": "ed127652-9303-425e-a909-ab68f8b1c65f",
+                  "text": "Sim, tranquilo",
+                  "type": "button",
+                  "nextBlockId": "6cafa873-055d-48e3-a0e8-aa947ba8a244"
+                },
+                {
+                  "id": "d0edb99e-5af1-4c08-a7d7-267332adc4b9",
+                  "text": "Sou de outra cidade",
+                  "type": "button",
+                  "nextBlockId": "89a771e0-a68a-4402-b961-ff6d3dd565b1"
+                }
+              ],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "WHATSAPP",
+        "provider": "WHATSAPP_CLOUD_API",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 200,
+        "y": 2450
+      }
+    },
+    {
+      "id": "64dfe0aa-1128-4010-9d85-51ee77381062",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "3385251a-1969-4d69-bd61-ebb28fa0a86f",
+            "options": {
+              "text": "Você prefere vir de manhã ou à tarde? 🗓️\n\n👇 *Toque em uma das opções abaixo*",
+              "buttons": [
+                {
+                  "id": "a88b573c-107f-458b-86a5-86523426914c",
+                  "text": "De manhã",
+                  "type": "button",
+                  "nextBlockId": "e931f7da-e653-4d55-8057-7c6ade3d8c0a"
+                },
+                {
+                  "id": "afdd7294-864a-4cf4-a09e-f7168a846f0e",
+                  "text": "À tarde",
+                  "type": "button",
+                  "nextBlockId": "e931f7da-e653-4d55-8057-7c6ade3d8c0a"
+                },
+                {
+                  "id": "a1aac995-7e72-4dc0-bb28-94fab7b9507a",
+                  "text": "Tanto faz",
+                  "type": "button",
+                  "nextBlockId": "e931f7da-e653-4d55-8057-7c6ade3d8c0a"
+                }
+              ],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "WHATSAPP",
+        "provider": "WHATSAPP_CLOUD_API",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 200,
+        "y": 2100
+      }
+    },
+    {
+      "id": "0d93e33e-02d8-421e-959e-173191444207",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "79d8efb2-7959-4ef8-9aeb-0a0c33f0f8d2",
+            "options": {
+              "text": "O primeiro passo aqui é uma *avaliação* com o nosso especialista 🦷\n\nEle examina o seu caso com calma, tira todas as suas dúvidas e monta o plano ideal pra você — assim você já sai daqui sabendo exatamente o que precisa ser feito, sem surpresa.\n\nVou reservar um horário pra você, tá bom?",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "WHATSAPP",
+        "provider": "WHATSAPP_CLOUD_API",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "64dfe0aa-1128-4010-9d85-51ee77381062",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 200,
+        "y": 1750
+      }
+    },
+    {
+      "id": "59831526-f7be-4339-bd6f-6044281a7987",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "ecdbc1f1-19f2-4c91-b33b-be48a75fe7fc",
+            "options": {
+              "text": "Que bom que você decidiu cuidar disso! 💚\n\nE o que você gostaria de resolver?\n\n👇 *Toque em uma das opções abaixo*",
+              "buttons": [
+                {
+                  "id": "18e030fb-bc52-412a-a9f4-98537dfb6d22",
+                  "text": "Implante ou prótese",
+                  "type": "button",
+                  "nextBlockId": "0d93e33e-02d8-421e-959e-173191444207"
+                },
+                {
+                  "id": "4fdfad04-549a-428f-9e3b-4f7c2dc13926",
+                  "text": "Aparelho / ortodontia",
+                  "type": "button",
+                  "nextBlockId": "0d93e33e-02d8-421e-959e-173191444207"
+                },
+                {
+                  "id": "6bebc224-5efc-4c41-af4b-5b32d0971838",
+                  "text": "Limpeza e avaliação",
+                  "type": "button",
+                  "nextBlockId": "0d93e33e-02d8-421e-959e-173191444207"
+                }
+              ],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "WHATSAPP",
+        "provider": "WHATSAPP_CLOUD_API",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 600,
+        "y": 1400
+      }
+    },
+    {
+      "id": "0b5d73c5-a7f7-4243-b8d0-809198ff4d4f",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "dd9c53b9-e75b-49a4-8158-df2742cac4e4",
+            "options": {
+              "text": "Que bom! Cuidar desde cedo faz toda a diferença no sorriso dele 🧒✨",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "WHATSAPP",
+        "provider": "WHATSAPP_CLOUD_API",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "0d93e33e-02d8-421e-959e-173191444207",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": -300,
+        "y": 1400
+      }
+    },
+    {
+      "id": "9a29742e-568f-45eb-8551-a9d219ebb529",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "9fa6f6cb-4604-4b64-b5a1-34558de31b2f",
+            "options": {
+              "text": "Olá! Tudo bem? 😊\n\nAqui é a assistente da *Master Clinic Odontologia Especializada* — unidade Ipatinga ✨\n\nQue bom ter você por aqui! Me conta como podemos cuidar do seu sorriso 💚\n\n👇 *Toque em uma das opções abaixo*",
+              "buttons": [
+                {
+                  "id": "f926a439-0c36-41b1-9e80-2e64fa7484f9",
+                  "text": "Estou com dor",
+                  "type": "button",
+                  "nextBlockId": "24196bf7-a8ca-48dd-bc07-1fc8398b6400"
+                },
+                {
+                  "id": "556d9620-32fb-4a6a-9c8a-032fb9735407",
+                  "text": "Quero fazer um tratamento",
+                  "type": "button",
+                  "nextBlockId": "59831526-f7be-4339-bd6f-6044281a7987"
+                },
+                {
+                  "id": "525bde77-fc89-47ef-86ea-837c352fb429",
+                  "text": "Levar meu filho",
+                  "type": "button",
+                  "nextBlockId": "0b5d73c5-a7f7-4243-b8d0-809198ff4d4f"
+                }
+              ],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "WHATSAPP",
+        "provider": "WHATSAPP_CLOUD_API",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 200,
+        "y": 1050
+      }
+    },
+    {
+      "id": "b85a4cef-e3c6-4ac4-8d68-4cc5e6396f2a",
+      "type": "action",
+      "sourceBlockId": null,
+      "options": {
+        "actions": [
+          {
+            "name": "add-tag-action",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "09e51ab5-96ab-4955-bf61-cf13120bd880"
+              ],
+              "tagName": ""
+            }
+          }
+        ],
+        "nextBlockId": "9a29742e-568f-45eb-8551-a9d219ebb529"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 700
+      }
+    },
+    {
+      "id": "3c6a199d-1200-43e2-b70c-282078745726",
+      "type": "condition",
+      "sourceBlockId": null,
+      "options": {
+        "conditions": [
+          {
+            "name": "lead-has-tag-condition",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "7309d983-fefa-4b83-93be-fe1d7b2131c0"
+              ]
+            }
+          }
+        ],
+        "trueNextBlockId": "",
+        "falseNextBlockId": "b85a4cef-e3c6-4ac4-8d68-4cc5e6396f2a"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 350
+      }
+    }
+  ],
+  "tenantId": "69937b06-43cd-40d2-bd39-d3d3c9223283"
+}

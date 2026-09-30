@@ -1,0 +1,105 @@
+{
+  "id": "8d69fae4-ebe9-45cd-9a1e-c31bb062efc8",
+  "createdAt": "2026-07-14T12:00:00.000Z",
+  "name": "MENTORIA · Lembrete + No-show",
+  "version": 1,
+  "active": false,
+  "notes": [
+    {
+      "id": "a84aab28-27a6-44ff-8c21-b2f69a80ad0d",
+      "options": {
+        "text": "📋 MENTORIA · Lembrete + No-show  [ESQUELETO]\n\nDispara ao ganhar a tag REUNIAO-AGENDADA (versão simples:\nmanda o lembrete). \n\n⚠️ EVOLUIR: usar delay 'até a data' (until-date-delay) com a\ndata do booking vinda do Cal.com para lembrar NO DIA/hora certa,\ne um ramo de NO-SHOW (webhook cancel/no-show → tag NO-SHOW +\ntrilha de recuperação com novo link Cal.com).",
+        "color": "#fde68a",
+        "width": 560,
+        "height": 340
+      },
+      "presentation": {
+        "x": -760,
+        "y": -260
+      }
+    }
+  ],
+  "blocks": [
+    {
+      "id": "70f86131-011f-4791-b9b4-a95394e09cfd",
+      "type": "trigger",
+      "sourceBlockId": null,
+      "options": {
+        "triggers": [
+          {
+            "name": "lead-tag-added-trigger",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "ec2b3f0d-c0a0-4132-a36e-194ea4c60296"
+              ]
+            }
+          }
+        ],
+        "nextBlockId": "62d5c701-8906-45ad-ac76-4bc0cdee492d"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 0
+      }
+    },
+    {
+      "id": "62d5c701-8906-45ad-ac76-4bc0cdee492d",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "dda35ee5-ebdf-4b6c-82c1-6042084090c3",
+            "options": {
+              "text": "Bom dia, {leadFirstName}! ☀️ Hoje é o dia da sua conversa com o Dr. Wilton.\n\nSepara uns minutinhos num lugar tranquilo — vai ser muito produtivo. Te espero! 🙌",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "",
+        "provider": "",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "75138c44-c0a7-4f7e-84fa-74114a4566ce",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 200,
+        "y": 350
+      }
+    },
+    {
+      "id": "75138c44-c0a7-4f7e-84fa-74114a4566ce",
+      "type": "action",
+      "sourceBlockId": null,
+      "options": {
+        "actions": [
+          {
+            "name": "add-tag-action",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "4c060640-ebb2-4261-bf6d-5b6ad160933c"
+              ],
+              "tagName": ""
+            }
+          }
+        ],
+        "nextBlockId": ""
+      },
+      "presentation": {
+        "x": 200,
+        "y": 700
+      }
+    }
+  ],
+  "tenantId": "69937b06-43cd-40d2-bd39-d3d3c9223283"
+}

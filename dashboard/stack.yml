@@ -1,0 +1,69 @@
+# Stack Docker Swarm — Painel Master Clinic
+# Deploy:  docker stack deploy -c stack.yml painel-mc
+# Requer: rede overlay externa do Traefik (TRAEFIK_NETWORK) e a imagem
+# `painel-mc:latest` buildada no nó (docker build -t painel-mc:latest .)
+#
+# Variáveis: exportar antes do deploy ou usar `env $(cat .env | xargs) docker stack deploy ...`
+# Na VPS Tecminas: TRAEFIK_NETWORK=Mapeamento, CERT_RESOLVER=letsencryptresolver
+version: "3.8"
+
+services:
+  app:
+    image: painel-mc:latest
+    environment:
+      DATABASE_URL: postgresql://painel:${POSTGRES_PASSWORD}@db:5432/painel
+      DATACRAZY_API_KEY_MASTERCLINIC: ${DATACRAZY_API_KEY_MASTERCLINIC}
+      FB_ACCESS_TOKEN: ${FB_ACCESS_TOKEN}
+      CLINICORP_API_USER: ${CLINICORP_API_USER:-}
+      CLINICORP_API_TOKEN: ${CLINICORP_API_TOKEN:-}
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      UAZAPI_TOKEN: ${UAZAPI_TOKEN:-}
+      DIGEST_PHONES: ${DIGEST_PHONES:-}
+      DASHBOARD_PASSWORD: ${DASHBOARD_PASSWORD}
+      SECRET_KEY: ${SECRET_KEY}
+      INGEST_TOKEN: ${INGEST_TOKEN:-}
+      TZ: America/Sao_Paulo
+    networks:
+      - traefik-net
+      - interna
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+        delay: 10s
+      labels:
+        - traefik.enable=true
+        - traefik.http.routers.painel-mc.rule=Host(`${PAINEL_DOMAIN}`)
+        - traefik.http.routers.painel-mc.entrypoints=websecure
+        - traefik.http.routers.painel-mc.tls=true
+        - traefik.http.routers.painel-mc.tls.certresolver=${CERT_RESOLVER:-letsencryptresolver}
+        - traefik.http.services.painel-mc.loadbalancer.server.port=8000
+        - traefik.swarm.network=${TRAEFIK_NETWORK:-Mapeamento}
+    depends_on:
+      - db
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: painel
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: painel
+    volumes:
+      - painel_pgdata:/var/lib/postgresql/data
+    networks:
+      - interna
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: any
+
+networks:
+  traefik-net:
+    external: true
+    name: ${TRAEFIK_NETWORK:-Mapeamento}
+  interna:
+    driver: overlay
+
+volumes:
+  painel_pgdata:

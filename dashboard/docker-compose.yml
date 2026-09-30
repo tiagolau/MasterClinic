@@ -1,0 +1,30 @@
+# Compose para rodar local (dev/teste) — produção usa stack.yml (Swarm)
+services:
+  app:
+    build: .
+    ports:
+      - "8000:8000"
+    env_file: .env
+    environment:
+      DATABASE_URL: postgresql://painel:${POSTGRES_PASSWORD:-painel}@db:5432/painel
+    depends_on:
+      db:
+        condition: service_healthy
+
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: painel
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-painel}
+      POSTGRES_DB: painel
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U painel"]
+      interval: 3s
+      retries: 20
+
+volumes:
+  pgdata:

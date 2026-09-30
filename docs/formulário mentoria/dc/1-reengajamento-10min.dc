@@ -1,0 +1,238 @@
+{
+  "id": "be485b45-f517-4c59-9589-0d0568be886c",
+  "createdAt": "2026-07-14T12:00:00.000Z",
+  "name": "MENTORIA · Reengajamento 10min",
+  "version": 1,
+  "active": false,
+  "notes": [
+    {
+      "id": "10f25262-b3f8-422b-87cb-f9529066c251",
+      "options": {
+        "text": "📋 MENTORIA · Reengajamento 10min\n\n1. Lead criado (form da LP)\n2. Filtra source = LP-MENTORIA-WILTON\n3. Cria card em 'Novo Lead' + tag FORM-RESPONDIDO\n4. Espera 10 min\n5. Se JÁ conversou (tag CONVERSOU) → encerra\n6. Senão → abertura fria + chama a Automação 2\n\n⚠️ AMARRAR: no bloco 'iniciar outra automação', selecionar\na automação 'MENTORIA · Chatbot Agendamento'.\n⚠️ Selecionar a INSTÂNCIA (canal) nos blocos de mensagem.",
+        "color": "#bae6fd",
+        "width": 560,
+        "height": 420
+      },
+      "presentation": {
+        "x": -760,
+        "y": -260
+      }
+    }
+  ],
+  "blocks": [
+    {
+      "id": "346bcc26-1380-4af3-aa11-bd112f05f123",
+      "type": "trigger",
+      "sourceBlockId": null,
+      "options": {
+        "triggers": [
+          {
+            "name": "lead-created-trigger",
+            "group": "lead",
+            "options": {}
+          }
+        ],
+        "nextBlockId": "91584817-c69b-4230-bd95-31ece5b3a031"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 0
+      }
+    },
+    {
+      "id": "91584817-c69b-4230-bd95-31ece5b3a031",
+      "type": "condition",
+      "sourceBlockId": null,
+      "options": {
+        "conditions": [
+          {
+            "name": "field-is-equal-condition",
+            "group": "field",
+            "options": {
+              "equalsTo": "LP-MENTORIA-WILTON",
+              "parameter": "leadSource"
+            }
+          }
+        ],
+        "trueNextBlockId": "763d2105-a26a-491b-9c36-67e323143f18",
+        "falseNextBlockId": ""
+      },
+      "presentation": {
+        "x": 200,
+        "y": 350
+      }
+    },
+    {
+      "id": "763d2105-a26a-491b-9c36-67e323143f18",
+      "type": "action",
+      "sourceBlockId": null,
+      "options": {
+        "actions": [
+          {
+            "name": "create-business-action",
+            "group": "business",
+            "options": {
+              "stageId": "1d50f3f2-c39c-4257-823f-f210a29e62b1"
+            }
+          },
+          {
+            "name": "add-tag-action",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "47f85b09-938f-40e7-b5fa-ca5461d729c6"
+              ],
+              "tagName": ""
+            }
+          }
+        ],
+        "nextBlockId": "6532a9c1-552a-4572-bc60-2796c1aa18d3"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 700
+      }
+    },
+    {
+      "id": "6532a9c1-552a-4572-bc60-2796c1aa18d3",
+      "type": "delay",
+      "sourceBlockId": null,
+      "options": {
+        "delay": {
+          "name": "minutes-delay",
+          "options": {
+            "minutes": 10
+          }
+        },
+        "nextBlockId": "56f7cc29-561d-4f39-a48d-4f09d6850836"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 1050
+      }
+    },
+    {
+      "id": "56f7cc29-561d-4f39-a48d-4f09d6850836",
+      "type": "condition",
+      "sourceBlockId": null,
+      "options": {
+        "conditions": [
+          {
+            "name": "lead-has-tag-condition",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "09e51ab5-96ab-4955-bf61-cf13120bd880"
+              ]
+            }
+          }
+        ],
+        "trueNextBlockId": "",
+        "falseNextBlockId": "a65f85e4-9801-4f73-b728-641898a7c773"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 1400
+      }
+    },
+    {
+      "id": "a65f85e4-9801-4f73-b728-641898a7c773",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "b464a327-1409-423c-ab29-0c7b838ef39c",
+            "options": {
+              "text": "Oi {leadFirstName}, tudo bem? 😊 Aqui é a equipe do Dr. Wilton Vargas.\n\nVocê preencheu o formulário da nossa mentoria há pouco e queria garantir que seu lugar não se perca.",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "",
+        "provider": "",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "0b747c2a-1a14-426a-89bb-eb3f8d43e993",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 200,
+        "y": 1750
+      }
+    },
+    {
+      "id": "0b747c2a-1a14-426a-89bb-eb3f8d43e993",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "ad7c1812-5d86-4aa1-a883-90800f398e5b",
+            "options": {
+              "text": "Tenho uma novidade rápida sobre como o Dr. Wilton pode te ajudar a estruturar seu consultório para faturar com previsibilidade e sair do operacional.\n\nO primeiro passo é uma conversa de diagnóstico (rápida, 30 minutos) direto com ele.",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "",
+        "provider": "",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "a057c8b1-200a-44fb-af74-be97333d5863",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 200,
+        "y": 2100
+      }
+    },
+    {
+      "id": "a057c8b1-200a-44fb-af74-be97333d5863",
+      "type": "action",
+      "sourceBlockId": null,
+      "options": {
+        "actions": [
+          {
+            "name": "add-tag-action",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "1bb16dbe-cf1a-4723-b47b-a55e0067c396"
+              ],
+              "tagName": ""
+            }
+          },
+          {
+            "name": "start-another-automation-action",
+            "group": "system",
+            "options": {
+              "automationId": "",
+              "parameters": []
+            }
+          }
+        ],
+        "nextBlockId": ""
+      },
+      "presentation": {
+        "x": 200,
+        "y": 2450
+      }
+    }
+  ],
+  "tenantId": "69937b06-43cd-40d2-bd39-d3d3c9223283"
+}

@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Especificação Técnica de Webhooks & Checklist CRM | Master Clinic</title>
+  <meta name="description" content="Especificação técnica oficial dos Webhooks entre Clinicorp e DataCrazy, gatilhos de status da agenda, frases-âncora e checklist de implementação para o time técnico da Master Clinic.">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <style>
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-card: #ffffff;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      
+      --accent-blue: #0284c7;
+      --accent-blue-dark: #0369a1;
+      --accent-emerald: #059669;
+      --accent-amber: #d97706;
+      --accent-rose: #be123c;
+      --accent-purple: #7c3aed;
+      --accent-gold: #92400e;
+      
+      --border-color: #e2e8f0;
+      --border-subtle: #f1f5f9;
+      
+      --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.06);
+      
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+      --radius-full: 9999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.55;
+      padding-bottom: 60px;
+    }
+
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* HEADER */
+    header {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      padding: 18px 0;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .brand-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, #0284c7, #0369a1);
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 18px;
+    }
+
+    .brand-text h1 {
+      font-size: 17px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .brand-text p {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-action {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .btn-action:hover {
+      background: #f8fafc;
+      color: var(--accent-blue);
+      border-color: var(--accent-blue);
+    }
+
+    .btn-primary {
+      background: var(--accent-blue);
+      color: #ffffff;
+      border-color: var(--accent-blue);
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-blue-dark);
+      color: #ffffff;
+    }
+
+    /* INTRO BANNER */
+    .intro-banner {
+      background: #f0f9ff;
+      border: 1px solid #bae6fd;
+      border-left: 4px solid var(--accent-blue);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      font-size: 13px;
+      color: #1e293b;
+      line-height: 1.55;
+    }
+
+    .intro-banner strong {
+      color: #0369a1;
+    }
+
+    /* PROGRESS BAR TRACKER */
+    .progress-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .progress-bar-bg {
+      width: 100%;
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: var(--radius-full);
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #0284c7, #059669);
+      width: 0%;
+      transition: width 0.3s ease;
+      border-radius: var(--radius-full);
+    }
+
+    /* SECTIONS */
+    .section-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .section-header {
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border-color);
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .section-header h2 {
+      font-size: 14.5px;
+      font-weight: 800;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-body {
+      padding: 18px 20px;
+    }
+
+    /* CHECKLIST ITEMS */
+    .checklist-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      border-radius: var(--radius-sm);
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .check-item:hover {
+      border-color: #cbd5e1;
+      background: #f8fafc;
+    }
+
+    .check-item.completed {
+      background: #f0fdf4;
+      border-color: #bbf7d0;
+    }
+
+    .check-item input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      accent-color: var(--accent-emerald);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .check-content {
+      flex: 1;
+    }
+
+    .check-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 4px;
+    }
+
+    .check-desc {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .code-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      background: #f1f5f9;
+      color: #0369a1;
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid #e2e8f0;
+      font-weight: 600;
+    }
+
+    .tag-badge {
+      font-size: 10.5px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: var(--radius-full);
+      background: #e0f2fe;
+      color: #0369a1;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .tag-badge.emerald { background: #dcfce7; color: #15803d; }
+    .tag-badge.amber { background: #fef3c7; color: #b45309; }
+    .tag-badge.rose { background: #ffe4e6; color: #be123c; }
+    .tag-badge.purple { background: #f3e8ff; color: #6b21a8; }
+    .tag-badge.gold { background: #fef9c3; color: #854d0e; }
+
+    /* WEBHOOK BOX & PAYLOAD */
+    .webhook-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 14px;
+      border-left: 4px solid var(--wh-color, #0284c7);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .webhook-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .webhook-event-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--wh-color, #0284c7);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .webhook-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      font-size: 12px;
+    }
+
+    .webhook-col {
+      background: #f8fafc;
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+    }
+
+    .webhook-col-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: var(--accent-blue-dark);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .webhook-col-title.why {
+      color: #92400e;
+    }
+
+    /* COPY BOX */
+    .copy-box {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-left: 3px solid var(--accent-blue);
+      border-radius: var(--radius-sm);
+      padding: 10px 14px;
+      margin-top: 8px;
+      font-size: 12px;
+      color: #1e293b;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .copy-text {
+      font-style: italic;
+      flex: 1;
+    }
+
+    .btn-copy {
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      padding: 4px 8px;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 4px;
+      cursor: pointer;
+      color: var(--text-secondary);
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .btn-copy:hover {
+      background: #f1f5f9;
+      color: var(--accent-blue);
+      border-color: var(--accent-blue);
+    }
+
+    /* DATA TABLE */
+    .table-responsive {
+      overflow-x: auto;
+      margin-top: 10px;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .data-table th {
+      background: #f8fafc;
+      color: #0f172a;
+      text-align: left;
+      padding: 9px 12px;
+      font-weight: 700;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .data-table td {
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border-subtle);
+      color: #334155;
+    }
+
+    .data-table tr:hover td {
+      background: #f8fafc;
+    }
+
+    /* TOAST */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      background: #0f172a;
+      color: #ffffff;
+      padding: 10px 18px;
+      border-radius: var(--radius-sm);
+      font-size: 12.5px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: var(--shadow-md);
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.25s ease;
+      z-index: 100;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    @media (max-width: 768px) {
+      .webhook-grid { grid-template-columns: 1fr; }
+      .header-content { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media print {
+      header, .header-actions, .progress-card button { display: none; }
+      body { background: #fff; padding: 0; }
+      .container { max-width: 100%; }
+      .section-card { border: 1px solid #ccc; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <div class="container header-content">
+      <div class="brand-title">
+        <div class="brand-logo">
+          <i class="fa-solid fa-network-wired"></i>
+        </div>
+        <div class="brand-text">
+          <h1>Master Clinic • Especificação Técnica de Webhooks & CRM</h1>
+          <p>Mapeamento de Integrações Clinicorp ↔ DataCrazy / WhatsApp</p>
+        </div>
+      </div>
+
+      <div class="header-actions">
+        <button class="btn-action btn-primary" onclick="toggleAllChecks(true)"><i class="fa-solid fa-check-double"></i> Marcar Todos</button>
+        <button class="btn-action" onclick="toggleAllChecks(false)"><i class="fa-solid fa-rotate-left"></i> Limpar Tudo</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- BANNER DE ORIENTAÇÃO -->
+    <div class="intro-banner">
+      <strong>🎯 Guia Oficial de Implementação Técnica (Tiago Lau Chaves / CRM):</strong>
+      Este documento especifica exatamente todos os <strong>Webhooks e Gatilhos disparados pelo Clinicorp</strong> (quando o status da agenda ou orçamento muda) e as <strong>regras de mensagens rápidas no DataCrazy</strong> para movimentação automática das 10 colunas do funil.
+    </div>
+
+    <!-- BARRA DE PROGRESSO -->
+    <div class="progress-card">
+      <div class="progress-header">
+        <div>
+          <span>Progresso da Implementação Técnica:</span>
+          <div style="font-size: 11px; color: var(--accent-emerald); font-weight: 600; margin-top: 2px;">
+            <i class="fa-solid fa-floppy-disk"></i> Salvamento automático offline ativo neste dispositivo
+          </div>
+        </div>
+        <span id="progress-text">0 de 21 tarefas concluídas (0%)</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-bar"></div>
+      </div>
+    </div>
+
+    <!-- SEÇÃO 1: WEBHOOKS CLINICORP -> DATACRAZY (STATUS DA AGENDA COMO GATILHOS) -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2><i class="fa-solid fa-bolt" style="color: var(--accent-amber);"></i> 1. Webhooks do Clinicorp → DataCrazy (Gatilhos da Agenda Clínica)</h2>
+        <span class="tag-badge amber">Gatilhos de Eventos Clínicos</span>
+      </div>
+      <div class="section-body">
+        <p style="font-size: 12.5px; color: var(--text-secondary); margin-bottom: 16px;">
+          Configurar as ações automáticas no CRM DataCrazy quando a recepção ou os doutores alterarem o status das consultas e orçamentos no Clinicorp:
+        </p>
+
+        <!-- WEBHOOK 1: ATENDIDO (1ª CONSULTA) -->
+        <div class="webhook-card" style="--wh-color: #8b5cf6;">
+          <div class="webhook-header">
+            <span class="webhook-event-name"><i class="fa-solid fa-circle-check"></i> 1. Status da Agenda: "REALIZADO / ATENDIDO" (1ª Consulta)</span>
+            <span class="tag-badge purple">Move para: 05. Avaliação Realizada</span>
+          </div>
+          <div class="webhook-grid">
+            <div class="webhook-col">
+              <div class="webhook-col-title"><i class="fa-solid fa-gears"></i> O Que Deve Ser Feito?</div>
+              <ul style="padding-left: 16px; margin: 0; line-height: 1.45;">
+                <li>Mover o lead automaticamente para a coluna <strong>"05. Avaliação Realizada"</strong>.</li>
+                <li>Transferir o responsável do card para a <strong>Dra. Danielle Carvalho (Closer)</strong>.</li>
+                <li>Cancelar lembretes de pré-consulta e abrir tarefa de apresentação da proposta de tratamento.</li>
+              </ul>
+            </div>
+            <div class="webhook-col">
+              <div class="webhook-col-title why"><i class="fa-solid fa-bullseye"></i> Por Que Deve Ser Feito?</div>
+              <div>O paciente acabou de passar pelo diagnóstico na cadeira com o Dr. Wilton. O momento imediato após a consulta é o ponto mais alto de confiança para a Dra. Danielle negociar valores e fechar o contrato.</div>
+            </div>
+          </div>
+          <label class="check-item" style="margin-top: 10px;">
+            <input type="checkbox" id="chk_wh_atendido_1" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title">Configurar Gatilho: Clinicorp ATENDIDO (1ª Consulta) → Coluna 05</div>
+              <div class="check-desc">Mover o lead para Avaliação Realizada e transferir a responsabilidade para a Dra. Danielle.</div>
+            </div>
+          </label>
+        </div>
+
+        <!-- WEBHOOK 2: FALTOU (NO-SHOW) -->
+        <div class="webhook-card" style="--wh-color: #e11d48;">
+          <div class="webhook-header">
+            <span class="webhook-event-name"><i class="fa-solid fa-user-xmark"></i> 2. Status da Agenda: "FALTOU / NO-SHOW"</span>
+            <span class="tag-badge rose">Dispara Recuperação 2h</span>
+          </div>
+          <div class="webhook-grid">
+            <div class="webhook-col">
+              <div class="webhook-col-title"><i class="fa-solid fa-gears"></i> O Que Deve Ser Feito?</div>
+              <ul style="padding-left: 16px; margin: 0; line-height: 1.45;">
+                <li>Manter o lead na coluna <strong>"04. Avaliação Agendada"</strong> (não dar como perdido).</li>
+                <li>Adicionar a tag vermelha <code class="code-pill">Não compareceu</code>.</li>
+                <li>Agendar disparo automático da <strong>mensagem carinhosa de recuperação em 2 horas</strong>.</li>
+              </ul>
+            </div>
+            <div class="webhook-col">
+              <div class="webhook-col-title why"><i class="fa-solid fa-bullseye"></i> Por Que Deve Ser Feito?</div>
+              <div>Imprevistos acontecem. Abordar o paciente de forma empática logo 2 horas após a falta evita que o lead esfrie e resgata até 40% dos agendamentos perdidos sem sobrecarregar a recepção.</div>
+            </div>
+          </div>
+          <label class="check-item" style="margin-top: 10px;">
+            <input type="checkbox" id="chk_wh_faltou" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title">Configurar Gatilho: Clinicorp FALTOU → Tag + Disparo Automático 2h</div>
+              <div class="check-desc">Aplicar tag de falta e programar a régua de resgate humanizado no WhatsApp após 2 horas.</div>
+            </div>
+          </label>
+        </div>
+
+        <!-- WEBHOOK 3: CONFIRMADO -->
+        <div class="webhook-card" style="--wh-color: #059669;">
+          <div class="webhook-header">
+            <span class="webhook-event-name"><i class="fa-solid fa-clipboard-check"></i> 3. Status da Agenda: "CONFIRMADO"</span>
+            <span class="tag-badge emerald">Aplica Tag #confirmado</span>
+          </div>
+          <div class="webhook-grid">
+            <div class="webhook-col">
+              <div class="webhook-col-title"><i class="fa-solid fa-gears"></i> O Que Deve Ser Feito?</div>
+              <ul style="padding-left: 16px; margin: 0; line-height: 1.45;">
+                <li>Adicionar a tag <code class="code-pill">#confirmado</code> no cartão do paciente.</li>
+                <li>Atualizar o status visual sem trocar de coluna no CRM.</li>
+              </ul>
+            </div>
+            <div class="webhook-col">
+              <div class="webhook-col-title why"><i class="fa-solid fa-bullseye"></i> Por Que Deve Ser Feito?</div>
+              <div>Oferece visibilidade imediata para toda a equipe de que o paciente garantiu a presença, permitindo organizar a recepção e a sala de atendimento com antecedência.</div>
+            </div>
+          </div>
+          <label class="check-item" style="margin-top: 10px;">
+            <input type="checkbox" id="chk_wh_confirmado" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title">Configurar Gatilho: Clinicorp CONFIRMADO → Tag #confirmado</div>
+              <div class="check-desc">Sinalizar presença garantida no card para acompanhamento do time.</div>
+            </div>
+          </label>
+        </div>
+
+        <!-- WEBHOOK 4: AGENDADA 2ª CONSULTA -->
+        <div class="webhook-card" style="--wh-color: #ec4899;">
+          <div class="webhook-header">
+            <span class="webhook-event-name"><i class="fa-solid fa-calendar-plus"></i> 4. Novo Agendamento: "RETORNO / 2ª CONSULTA"</span>
+            <span class="tag-badge rose">Move para: 07. Agendada 2ª Consulta</span>
+          </div>
+          <div class="webhook-grid">
+            <div class="webhook-col">
+              <div class="webhook-col-title"><i class="fa-solid fa-gears"></i> O Que Deve Ser Feito?</div>
+              <ul style="padding-left: 16px; margin: 0; line-height: 1.45;">
+                <li>Mover o lead para a coluna <strong>"07. Agendada 2ª Consulta"</strong>.</li>
+                <li>Salvar a data da 2ª sessão e programar os lembretes de 48h e 24h.</li>
+              </ul>
+            </div>
+            <div class="webhook-col">
+              <div class="webhook-col-title why"><i class="fa-solid fa-bullseye"></i> Por Que Deve Ser Feito?</div>
+              <div>Casos cirúrgicos complexos necessitam de exames (tomografia) para apresentação do guia cirúrgico. Mover para a etapa 07 isola o fluxo e garante os lembretes da 2ª sessão.</div>
+            </div>
+          </div>
+          <label class="check-item" style="margin-top: 10px;">
+            <input type="checkbox" id="chk_wh_retorno" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title">Configurar Gatilho: Clinicorp RETORNO MARCADO → Coluna 07</div>
+              <div class="check-desc">Mover para etapa 07 e programar lembretes da sessão de planejamento cirúrgico.</div>
+            </div>
+          </label>
+        </div>
+
+        <!-- WEBHOOK 5: 2ª CONSULTA REALIZADA -->
+        <div class="webhook-card" style="--wh-color: #f43f5e;">
+          <div class="webhook-header">
+            <span class="webhook-event-name"><i class="fa-solid fa-stethoscope"></i> 5. Status da Agenda: "REALIZADO" (2ª Consulta / Retorno)</span>
+            <span class="tag-badge rose">Move para: 08. 2ª Consulta Realizada</span>
+          </div>
+          <div class="webhook-grid">
+            <div class="webhook-col">
+              <div class="webhook-col-title"><i class="fa-solid fa-gears"></i> O Que Deve Ser Feito?</div>
+              <ul style="padding-left: 16px; margin: 0; line-height: 1.45;">
+                <li>Mover o lead para <strong>"08. 2ª Consulta Realizada"</strong>.</li>
+                <li>Atribuir à <strong>Dra. Danielle</strong> para fechamento do contrato cirúrgico.</li>
+              </ul>
+            </div>
+            <div class="webhook-col">
+              <div class="webhook-col-title why"><i class="fa-solid fa-bullseye"></i> Por Que Deve Ser Feito?</div>
+              <div>O planejamento cirúrgico foi entregue. A Dra. Danielle assume a negociação final de prazos, formas de parcelamento e assinatura do contrato cirúrgico.</div>
+            </div>
+          </div>
+          <label class="check-item" style="margin-top: 10px;">
+            <input type="checkbox" id="chk_wh_atendido_2" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title">Configurar Gatilho: Clinicorp ATENDIDO (2ª Consulta) → Coluna 08</div>
+              <div class="check-desc">Mover para a etapa 08 e direcionar para negociação final de cirurgia com a Dra. Danielle.</div>
+            </div>
+          </label>
+        </div>
+
+        <!-- WEBHOOK 6: ORÇAMENTO APROVADO (GANHO) -->
+        <div class="webhook-card" style="--wh-color: #d97706;">
+          <div class="webhook-header">
+            <span class="webhook-event-name"><i class="fa-solid fa-trophy"></i> 6. Status de Orçamento: "APROVADO / FECHADO"</span>
+            <span class="tag-badge gold">Move para: 10. ⭐ GANHO</span>
+          </div>
+          <div class="webhook-grid">
+            <div class="webhook-col">
+              <div class="webhook-col-title"><i class="fa-solid fa-gears"></i> O Que Deve Ser Feito?</div>
+              <ul style="padding-left: 16px; margin: 0; line-height: 1.45;">
+                <li>Mover o lead para a coluna final <strong>"10. ⭐ GANHO"</strong>.</li>
+                <li>Registrar o valor monetário fechado no negócio do CRM.</li>
+                <li>Transferir o card para o <strong>Funil de Pós-Venda / Tratamento</strong>.</li>
+              </ul>
+            </div>
+            <div class="webhook-col">
+              <div class="webhook-col-title why"><i class="fa-solid fa-bullseye"></i> Por Que Deve Ser Feito?</div>
+              <div>Oficializa a conversão comercial, atualiza as métricas de receita da clínica e inicia a jornada clínica do paciente sem misturar vendas com tratamento em andamento.</div>
+            </div>
+          </div>
+          <label class="check-item" style="margin-top: 10px;">
+            <input type="checkbox" id="chk_wh_orcamento" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title">Configurar Gatilho: Clinicorp Orçamento Aprovado → Coluna 10 (GANHO)</div>
+              <div class="check-desc">Registrar valor final no CRM e migrar para o funil de pós-venda/tratamento.</div>
+            </div>
+          </label>
+        </div>
+
+        <!-- WEBHOOK 7: DESMARCADO / CANCELADO -->
+        <div class="webhook-card" style="--wh-color: #64748b;">
+          <div class="webhook-header">
+            <span class="webhook-event-name"><i class="fa-solid fa-calendar-xmark"></i> 7. Status da Agenda: "DESMARCADO / CANCELADO"</span>
+            <span class="tag-badge">Mantém na Coluna da Agenda</span>
+          </div>
+          <div class="webhook-grid">
+            <div class="webhook-col">
+              <div class="webhook-col-title"><i class="fa-solid fa-gears"></i> O Que Deve Ser Feito?</div>
+              <ul style="padding-left: 16px; margin: 0; line-height: 1.45;">
+                <li>Manter o lead na mesma coluna da agenda (<strong>04. Avaliação Agendada</strong> ou <strong>07. Agendada 2ª Consulta</strong>).</li>
+                <li>Adicionar a tag <code class="code-pill">Cancelado</code> (ou `Desmarcou`).</li>
+                <li>Gerar tarefa de <strong>contato ativo prioritário da equipe CRC</strong> para remarcação imediata de nova data.</li>
+              </ul>
+            </div>
+            <div class="webhook-col">
+              <div class="webhook-col-title why"><i class="fa-solid fa-bullseye"></i> Por Que Deve Ser Feito?</div>
+              <div>O lead não volta para o início do funil. Como o paciente avisou previamente que desmarcou, ele já está qualificado e precisa de uma atuação direta e ativa da CRC para agendar uma nova data antes que esfrie.</div>
+            </div>
+          </div>
+          <label class="check-item" style="margin-top: 10px;">
+            <input type="checkbox" id="chk_wh_desmarcado" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title">Configurar Gatilho: Clinicorp DESMARCADO → Tag "Cancelado" + Atuação Ativa CRC</div>
+              <div class="check-desc">Manter na coluna atual da agenda, aplicar tag Cancelado e gerar alerta de remarcação prioritária para a CRC.</div>
+            </div>
+          </label>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- SEÇÃO 2: AS 10 COLUNAS OFICIAIS NO CRM -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2><i class="fa-solid fa-columns" style="color: var(--accent-blue);"></i> 2. Criar as 10 Colunas Oficiais do Funil no DataCrazy</h2>
+        <span class="tag-badge">Estrutura de Pipeline</span>
+      </div>
+      <div class="section-body">
+        <div class="checklist-group">
+
+          <label class="check-item">
+            <input type="checkbox" id="chk_col_01" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title"><span>01. Novos Leads</span><span class="tag-badge">Split A/B 50/50</span></div>
+              <div class="check-desc">Entrada unificada via Tráfego Pago, Instagram, Site e WhatsApp. Split 50% Atendimento CRC / 50% Automação.</div>
+            </div>
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" id="chk_col_02" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title"><span>02. Atendimento Humanizado</span><span class="tag-badge emerald">Atendimento CRC</span></div>
+              <div class="check-desc">Qualificação inicial, acolhimento da dor do paciente e negociação de horários.</div>
+            </div>
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" id="chk_col_03" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title"><span>03. Follow-up Pré-Agenda</span><span class="tag-badge amber">Prazo: 30/60 Dias</span></div>
+              <div class="check-desc">Para quem adiou a consulta. Criação automática de tarefa de retorno no calendário.</div>
+            </div>
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" id="chk_col_04" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title"><span>04. Avaliação Agendada</span><span class="tag-badge emerald">1ª Consulta Marcada</span></div>
+              <div class="check-desc">Disparo da confirmação imediata + lembretes de 48h e 24h antes da consulta.</div>
+            </div>
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" id="chk_col_05" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title"><span>05. Avaliação Realizada</span><span class="tag-badge purple">Dra. Danielle (Closer)</span></div>
+              <div class="check-desc">Paciente compareceu à avaliação. Dra. Danielle apresenta opções de tratamento e valores.</div>
+            </div>
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" id="chk_col_06" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title"><span>06. Follow-up Orçamento</span><span class="tag-badge purple">Régua D+3, D+7, D+15</span></div>
+              <div class="check-desc">Acompanhamento ativo de propostas de alto ticket apresentadas na 1ª consulta.</div>
+            </div>
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" id="chk_col_07" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title"><span>07. Agendada 2ª Consulta</span><span class="tag-badge rose">Retorno / Planejamento</span></div>
+              <div class="check-desc">Para casos que demandaram tomografia ou exames radiológicos. Agendamento da 2ª sessão.</div>
+            </div>
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" id="chk_col_08" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title"><span>08. 2ª Consulta Realizada</span><span class="tag-badge purple">Dra. Danielle</span></div>
+              <div class="check-desc">Apresentação da guia cirúrgica/planejamento digital para fechamento do plano.</div>
+            </div>
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" id="chk_col_09" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title"><span>09. Follow-up 2ª Consulta</span><span class="tag-badge amber">Acompanhamento Final</span></div>
+              <div class="check-desc">Acompanhamento final de pacientes que realizaram a 2ª consulta e avaliam a cirurgia.</div>
+            </div>
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" id="chk_col_10" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title"><span>10. ⭐ GANHO</span><span class="tag-badge gold">Contrato Fechado</span></div>
+              <div class="check-desc">Coluna final de fechamento comercial (após todas as etapas). Transfere para pós-venda.</div>
+            </div>
+          </label>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- SEÇÃO 3: GATILHOS POR MENSAGENS RÁPIDAS (FRASES-ÂNCORA) -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2><i class="fa-brands fa-whatsapp" style="color: var(--accent-emerald);"></i> 3. Cadastrar Mensagens Rápidas de Gatilho (Frases-Âncora)</h2>
+        <span class="tag-badge emerald">Disparos da Equipe CRC</span>
+      </div>
+      <div class="section-body">
+        <p style="font-size: 12.5px; color: var(--text-secondary); margin-bottom: 14px;">
+          Cadastrar os atalhos de mensagem rápida no WhatsApp/DataCrazy e programar o gatilho de movimentação de coluna ao enviar:
+        </p>
+
+        <div class="checklist-group">
+
+          <label class="check-item">
+            <input type="checkbox" id="chk_msg_1" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title">
+                <span>Gatilho 1: 1ª Avaliação Agendada</span>
+                <span class="tag-badge emerald">Move para: 04. Avaliação Agendada</span>
+              </div>
+              <div class="copy-box">
+                <span class="copy-text" id="g-msg-1">"Tudo certo! Para esse dia e horário então está agendado do lado de cá. Aguardamos você na Master Clinic!"</span>
+                <button class="btn-copy" onclick="copyText('g-msg-1')"><i class="fa-regular fa-copy"></i> Copiar</button>
+              </div>
+            </div>
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" id="chk_msg_2" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title">
+                <span>Gatilho 2: Follow-up Pré-Agendamento</span>
+                <span class="tag-badge amber">Move para: 03. Follow-up Pré-Agenda</span>
+              </div>
+              <div class="copy-box">
+                <span class="copy-text" id="g-msg-2">"Combinado! Já deixei tudo anotado aqui do nosso lado para retomarmos o contato nessa data combinada. Até breve!"</span>
+                <button class="btn-copy" onclick="copyText('g-msg-2')"><i class="fa-regular fa-copy"></i> Copiar</button>
+              </div>
+            </div>
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" id="chk_msg_3" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title">
+                <span>Gatilho 3: 2ª Consulta Agendada (Retorno)</span>
+                <span class="tag-badge rose">Move para: 07. Agendada 2ª Consulta</span>
+              </div>
+              <div class="copy-box">
+                <span class="copy-text" id="g-msg-3">"Excelente! Para esse dia e horário a sua 2ª consulta de planejamento já está agendada do lado de cá. Dr. Wilton e Dra. Danielle já estão com seus exames preparados!"</span>
+                <button class="btn-copy" onclick="copyText('g-msg-3')"><i class="fa-regular fa-copy"></i> Copiar</button>
+              </div>
+            </div>
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" id="chk_msg_4" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title">
+                <span>Gatilho 4: Follow-up de Orçamento (Dra. Danielle)</span>
+                <span class="tag-badge purple">Move para: 06. Follow-up Orçamento</span>
+              </div>
+              <div class="copy-box">
+                <span class="copy-text" id="g-msg-4">"Perfeito! Deixei registrado aqui o seu plano de tratamento e fico à sua total disposição enquanto você analisa as condições que conversamos hoje."</span>
+                <button class="btn-copy" onclick="copyText('g-msg-4')"><i class="fa-regular fa-copy"></i> Copiar</button>
+              </div>
+            </div>
+          </label>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- SEÇÃO 4: RÉGUAS DE LEMBRETES & NO-SHOW -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2><i class="fa-solid fa-clock-rotate-left" style="color: var(--accent-rose);"></i> 4. Réguas de Lembretes Automáticos & No-Show</h2>
+        <span class="tag-badge rose">Automações de WhatsApp</span>
+      </div>
+      <div class="section-body">
+        <div class="checklist-group">
+
+          <label class="check-item">
+            <input type="checkbox" id="chk_rem_48" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title"><span>Lembrete de 48h Antes da Consulta</span><span class="tag-badge">WhatsApp</span></div>
+              <div class="check-desc">Disparo amigável solicitando confirmação de comparecimento.</div>
+            </div>
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" id="chk_rem_24" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title"><span>Lembrete de 24h Antes com Link do Maps</span><span class="tag-badge">WhatsApp</span></div>
+              <div class="check-desc">Disparo de véspera com rota direta para a unidade (Ipatinga ou Mesquita).</div>
+            </div>
+          </label>
+
+          <label class="check-item">
+            <input type="checkbox" id="chk_rem_noshow" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title"><span>Recuperação de No-Show (Faltosos em 2 Horas)</span><span class="tag-badge rose">Template de Resgate</span></div>
+              <div class="check-desc">Ao receber o webhook de falta ou aplicar tag `Não compareceu`, disparar template em 2h para reagendamento.</div>
+              <div class="copy-box">
+                <span class="copy-text" id="ns-copy">"Olá! Notamos que você não conseguiu comparecer à sua avaliação hoje na Master Clinic. Esperamos que esteja tudo bem! Como nossa equipe já havia reservado a sala, gostaríamos de verificar se prefere encontrar um novo horário para esta semana ou na próxima?"</span>
+                <button class="btn-copy" onclick="copyText('ns-copy')"><i class="fa-regular fa-copy"></i> Copiar</button>
+              </div>
+            </div>
+          </label>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- SEÇÃO 5: CONFIGURAÇÃO DE MOTIVOS DE PERDA -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2><i class="fa-solid fa-tags" style="color: var(--accent-amber);"></i> 5. Motivos de Perda no CRM</h2>
+        <span class="tag-badge amber">Auditoria de Gargalos</span>
+      </div>
+      <div class="section-body">
+        <div class="checklist-group">
+
+          <label class="check-item">
+            <input type="checkbox" id="chk_loss_reasons" onchange="handleCheck(this)">
+            <div class="check-content">
+              <div class="check-title"><span>Cadastrar Motivos de Perda Padronizados no CRM</span><span class="tag-badge">Campos do CRM</span></div>
+              <div class="check-desc">Cadastrar no campo de perda: <code>Parou de responder</code>, <code>Sem urgência / Deixou para depois</code>, <code>Preço / Sem limite no cartão</code>, <code>Optou por não fazer cirurgia</code> e <code>Desistiu após exames</code>.</div>
+            </div>
+          </label>
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- TOAST -->
+  <div id="toast" class="toast">
+    <i class="fa-solid fa-circle-check" style="color: #4ade80;"></i>
+    <span id="toast-text">Texto copiado para a área de transferência!</span>
+  </div>
+
+  <script>
+    const STORAGE_KEY = 'master_clinic_crm_checklist_saved_v2';
+
+    document.addEventListener('DOMContentLoaded', () => {
+      loadSavedChecks();
+      updateProgress();
+    });
+
+    function handleCheck(el) {
+      const parent = el.closest('.check-item');
+      if (el.checked) {
+        parent.classList.add('completed');
+      } else {
+        parent.classList.remove('completed');
+      }
+      saveChecks();
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const checkboxes = document.querySelectorAll('.check-item input[type="checkbox"]');
+      const total = checkboxes.length;
+      let checkedCount = 0;
+
+      checkboxes.forEach((cb) => {
+        if (cb.checked) {
+          checkedCount++;
+          cb.closest('.check-item').classList.add('completed');
+        } else {
+          cb.closest('.check-item').classList.remove('completed');
+        }
+      });
+
+      const pct = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
+      document.getElementById('progress-bar').style.width = `${pct}%`;
+      document.getElementById('progress-text').innerText = `${checkedCount} de ${total} tarefas concluídas (${pct}%)`;
+    }
+
+    function saveChecks() {
+      const checkboxes = document.querySelectorAll('.check-item input[type="checkbox"]');
+      const stateObj = {};
+      checkboxes.forEach(cb => {
+        if (cb.id) {
+          stateObj[cb.id] = cb.checked;
+        }
+      });
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(stateObj));
+      } catch (e) {
+        console.error("Erro ao salvar no localStorage", e);
+      }
+    }
+
+    function loadSavedChecks() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (!saved) return;
+        const stateObj = JSON.parse(saved);
+        const checkboxes = document.querySelectorAll('.check-item input[type="checkbox"]');
+        checkboxes.forEach(cb => {
+          if (cb.id && stateObj[cb.id] !== undefined) {
+            cb.checked = stateObj[cb.id];
+            if (cb.checked) {
+              cb.closest('.check-item').classList.add('completed');
+            } else {
+              cb.closest('.check-item').classList.remove('completed');
+            }
+          }
+        });
+      } catch (e) {
+        console.error("Erro ao carregar estado do checklist", e);
+      }
+    }
+
+    function toggleAllChecks(checkVal) {
+      const checkboxes = document.querySelectorAll('.check-item input[type="checkbox"]');
+      checkboxes.forEach(cb => {
+        cb.checked = checkVal;
+        if (checkVal) {
+          cb.closest('.check-item').classList.add('completed');
+        } else {
+          cb.closest('.check-item').classList.remove('completed');
+        }
+      });
+      saveChecks();
+      updateProgress();
+      showToast(checkVal ? "Todas as tarefas foram marcadas como concluídas!" : "Checklist limpo com sucesso!");
+    }
+
+    function copyText(elementId) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+      navigator.clipboard.writeText(el.innerText).then(() => {
+        showToast("Texto copiado com sucesso!");
+      }).catch(() => {
+        showToast("Erro ao copiar.");
+      });
+    }
+
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toast-text').innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => { toast.classList.remove('show'); }, 2500);
+    }
+  </script>
+</body>
+</html>

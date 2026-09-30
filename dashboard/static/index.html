@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#008e45">
+<title>Master Clinic — Painel</title>
+<link rel="icon" type="image/png" href="/static/img/favicon.png">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<div id="login" class="login hidden">
+  <form id="login-form" class="login-card">
+    <img class="logo-login" src="/static/img/logo-master-clinic.png" alt="Master Clinic — Odontologia Especializada">
+    <p>Painel comercial — acesso restrito</p>
+    <input id="senha" type="password" placeholder="Senha" autocomplete="current-password" autofocus>
+    <button type="submit">Entrar</button>
+    <div id="login-erro" class="login-erro"></div>
+  </form>
+</div>
+
+<header class="topo">
+  <div class="marca">
+    <img class="logo-topo" src="/static/img/logo-master-clinic.png" alt="Master Clinic">
+    <span class="divisor"></span>
+    <div class="contexto">
+      <strong>Painel comercial</strong>
+      Ipatinga · Mesquita
+    </div>
+  </div>
+  <nav class="filtros" id="filtro-periodo">
+    <button data-dias="7">7 dias</button>
+    <button data-dias="30" class="ativo">30 dias</button>
+    <button data-dias="90">90 dias</button>
+  </nav>
+  <div class="acoes">
+    <span id="sync-info" class="sync-info" title="última sincronização">—</span>
+    <button id="btn-diag" class="btn-fantasma" title="gerar diagnóstico de IA agora">🧠 Diagnóstico</button>
+  </div>
+</header>
+
+<main id="app" class="hidden">
+
+  <section class="tiles" id="tiles"></section>
+
+  <section class="grade">
+    <article class="cartao span2">
+      <h2>Gasto Meta × Leads por dia</h2>
+      <div id="chart-serie"></div>
+    </article>
+
+    <article class="cartao">
+      <h2>Oportunidades em aberto <span id="oport-n" class="badge"></span></h2>
+      <p class="sub">Pacientes esperando resposta — priorize os de tráfego</p>
+      <div id="oportunidades" class="lista-rolavel"></div>
+    </article>
+
+    <article class="cartao span2">
+      <h2>Campanhas <small class="periodo-label"></small></h2>
+      <div id="campanhas"></div>
+    </article>
+
+    <article class="cartao">
+      <h2>Funis por etapa</h2>
+      <div id="funis" class="lista-rolavel"></div>
+    </article>
+
+    <article class="cartao span3" id="card-agenda">
+      <h2>🦷 Agenda Clinicorp <small id="agenda-meta"></small></h2>
+      <div id="agenda"></div>
+    </article>
+
+    <article class="cartao span3">
+      <h2>🧠 Diagnóstico do dia <small id="diag-meta"></small></h2>
+      <div id="diagnostico"></div>
+    </article>
+
+    <article class="cartao span3">
+      <h2>Negócios estagnados</h2>
+      <div id="estagnados"></div>
+    </article>
+  </section>
+</main>
+
+<div id="modal" class="modal hidden">
+  <div class="modal-caixa">
+    <header><strong id="modal-titulo"></strong><button id="modal-fechar">×</button></header>
+    <div id="modal-corpo" class="modal-corpo"></div>
+  </div>
+</div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,662 @@
+{
+  "id": "09c80bb5-677b-4c68-8a04-687eeacef24a",
+  "createdAt": "2026-07-14T12:00:00.000Z",
+  "name": "MENTORIA · Chatbot Agendamento",
+  "version": 1,
+  "active": false,
+  "notes": [
+    {
+      "id": "5ef90c9c-dca2-4eba-aa19-f74f8613eb20",
+      "options": {
+        "text": "📋 MENTORIA · Chatbot Agendamento\n\nGatilho: mensagem recebida OU iniciado pela Automação 1\n→ tag CONVERSOU → saudação → valor → CTA (botões)\n  • Quero agendar → move Qualificado + link Cal.com\n  • Tenho dúvida → transfere p/ humano\nCadência resgate: +2h → +2h → +1d → +1d → breakup\n(cada etapa checa tag REUNIAO-AGENDADA e para se agendou)\n\n⚠️ Selecionar a INSTÂNCIA (canal) em cada bloco de mensagem.\n⚠️ Trocar o link Cal.com pelo real do Dr. Wilton.\n⚠️ Validar a variável {leadFirstName} no editor (menu de variáveis).",
+        "color": "#bae6fd",
+        "width": 600,
+        "height": 480
+      },
+      "presentation": {
+        "x": -760,
+        "y": -260
+      }
+    }
+  ],
+  "blocks": [
+    {
+      "id": "89a0ab31-dfdc-43c3-af65-3e7d009c0175",
+      "type": "trigger",
+      "sourceBlockId": null,
+      "options": {
+        "triggers": [
+          {
+            "name": "message-received-trigger",
+            "group": "messages",
+            "options": {
+              "type": "contains",
+              "keywords": [],
+              "instanceId": "",
+              "listenGroup": false,
+              "receiveJson": false,
+              "initializeSession": "only-if-finished"
+            }
+          },
+          {
+            "name": "initiated-by-another-automation-trigger",
+            "group": "system",
+            "options": {
+              "datasourceName": "Api-request-2",
+              "datasourceColor": "#6366f1"
+            }
+          }
+        ],
+        "nextBlockId": "be114549-c331-4472-ae2e-28b43cef95c7"
+      },
+      "presentation": {
+        "x": 200,
+        "y": -1300
+      }
+    },
+    {
+      "id": "be114549-c331-4472-ae2e-28b43cef95c7",
+      "type": "action",
+      "sourceBlockId": null,
+      "options": {
+        "actions": [
+          {
+            "name": "add-tag-action",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "09e51ab5-96ab-4955-bf61-cf13120bd880"
+              ],
+              "tagName": ""
+            }
+          }
+        ],
+        "nextBlockId": "c6238539-84a4-4675-95b6-88c5ee6b2512"
+      },
+      "presentation": {
+        "x": 200,
+        "y": -950
+      }
+    },
+    {
+      "id": "c6238539-84a4-4675-95b6-88c5ee6b2512",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "dc90701f-b2f7-4876-8fc9-17846a75a1aa",
+            "options": {
+              "text": "Oi {leadFirstName}! 👋 Aqui é a equipe do Dr. Wilton Vargas.\n\nVi que você preencheu o formulário da Mentoria Dr. Wilton Vargas — que bom te ver por aqui!\n\nPosso te explicar rapidinho como funciona e já deixar sua conversa com o Dr. Wilton agendada?",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "",
+        "provider": "",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "af00e0c1-fbc2-4e5d-92b8-71cc8a7f74ce",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 200,
+        "y": -600
+      }
+    },
+    {
+      "id": "af00e0c1-fbc2-4e5d-92b8-71cc8a7f74ce",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "7edc9b41-b97f-4dbe-80c0-414360fadc3c",
+            "options": {
+              "text": "A mentoria do Dr. Wilton é para dentistas que querem estruturar o consultório para faturar com previsibilidade e sair do operacional — sem depender de sorte ou trabalhar cada vez mais horas.\n\nEle é referência em gestão e crescimento de consultórios odontológicos, e agora abriu um número limitado de vagas para acompanhar dentistas de perto.\n\nO primeiro passo é uma conversa de diagnóstico (rápida, 30 minutos) direto com ele, pra entender seu momento e ver se faz sentido pra você.",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "",
+        "provider": "",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "731e47d9-74fd-4123-8128-7a12c3056619",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 200,
+        "y": -250
+      }
+    },
+    {
+      "id": "731e47d9-74fd-4123-8128-7a12c3056619",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "68a51b9d-1adf-4209-9ef3-ce2f445b9902",
+            "options": {
+              "text": "Quer agendar sua conversa de diagnóstico com o Dr. Wilton? 👇",
+              "buttons": [
+                {
+                  "id": "ec9dbf45-3d49-4574-9661-1cb051a72c16",
+                  "text": "Quero agendar",
+                  "type": "button",
+                  "nextBlockId": "ff7fb5de-64cb-49d7-8a48-a38de8fb80e8"
+                },
+                {
+                  "id": "2373c6bf-4315-4fba-9309-061aaee968b1",
+                  "text": "Tenho uma dúvida",
+                  "type": "button",
+                  "nextBlockId": "55631243-7419-4538-90bf-9cecdb80e0cf"
+                }
+              ],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "",
+        "provider": "",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 200,
+        "y": 100
+      }
+    },
+    {
+      "id": "ff7fb5de-64cb-49d7-8a48-a38de8fb80e8",
+      "type": "action",
+      "sourceBlockId": null,
+      "options": {
+        "actions": [
+          {
+            "name": "move-business-action",
+            "group": "business",
+            "options": {
+              "stageId": "4ad24dd6-ff9f-497f-9a68-e327a48a5fa4"
+            }
+          },
+          {
+            "name": "add-tag-action",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "7309d983-fefa-4b83-93be-fe1d7b2131c0"
+              ],
+              "tagName": ""
+            }
+          }
+        ],
+        "nextBlockId": "dbf4644e-df20-460b-8045-ed230e99f1dd"
+      },
+      "presentation": {
+        "x": 600,
+        "y": -250
+      }
+    },
+    {
+      "id": "dbf4644e-df20-460b-8045-ed230e99f1dd",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "fec1ed6a-0503-43d4-9f37-f0994902b846",
+            "options": {
+              "text": "Perfeito, {leadFirstName}! 🙌\n\nÉ só escolher o melhor dia e horário neste link — já vai preenchido com seus dados:\n\n👉 https://cal.com/dr-wilton/diagnostico?name={leadFirstName}&email={leadEmail}\n\nAssim que você confirmar, eu te mando a confirmação por aqui. Te espero! 😊",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "",
+        "provider": "",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "6db163c2-f8b3-499e-9ac4-135edd3f2063",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 600,
+        "y": 100
+      }
+    },
+    {
+      "id": "55631243-7419-4538-90bf-9cecdb80e0cf",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "97ccecb6-e215-4497-a8b8-1c7b307b2be9",
+            "options": {
+              "text": "Claro, {leadFirstName}! Me conta rapidinho qual é a sua dúvida que a nossa equipe te ajuda. 😊",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "",
+        "provider": "",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "29e26e38-2ff6-44cf-ad88-09f001867c87",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 1000,
+        "y": -250
+      }
+    },
+    {
+      "id": "29e26e38-2ff6-44cf-ad88-09f001867c87",
+      "type": "action",
+      "sourceBlockId": null,
+      "options": {
+        "actions": [
+          {
+            "name": "stop-chat-automations-action",
+            "group": "messages",
+            "options": {
+              "type": "current-conversation",
+              "instanceId": ""
+            }
+          },
+          {
+            "name": "send-notification-action",
+            "group": "system",
+            "options": {
+              "notification": "Lead da mentoria com dúvida — assumir atendimento",
+              "url": "",
+              "attendantsIds": []
+            }
+          }
+        ],
+        "nextBlockId": ""
+      },
+      "presentation": {
+        "x": 1000,
+        "y": 100
+      }
+    },
+    {
+      "id": "6db163c2-f8b3-499e-9ac4-135edd3f2063",
+      "type": "delay",
+      "sourceBlockId": null,
+      "options": {
+        "delay": {
+          "name": "hours-delay",
+          "options": {
+            "hours": 2
+          }
+        },
+        "nextBlockId": "2bc0a9d4-a29f-405e-93a0-fc599ff8d162"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 450
+      }
+    },
+    {
+      "id": "2bc0a9d4-a29f-405e-93a0-fc599ff8d162",
+      "type": "condition",
+      "sourceBlockId": null,
+      "options": {
+        "conditions": [
+          {
+            "name": "lead-has-tag-condition",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "ec2b3f0d-c0a0-4132-a36e-194ea4c60296"
+              ]
+            }
+          }
+        ],
+        "trueNextBlockId": "",
+        "falseNextBlockId": "1319c2e4-3272-41ea-930b-c2e3d13a5019"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 800
+      }
+    },
+    {
+      "id": "1319c2e4-3272-41ea-930b-c2e3d13a5019",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "f901587f-6198-4b28-bbfd-4a1c1bef8c76",
+            "options": {
+              "text": "{leadFirstName}, conseguiu escolher um horário? 😊 Se tiver qualquer dificuldade com o link, me fala que eu te ajudo por aqui.",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "",
+        "provider": "",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "601ec76a-4bda-40d0-8451-31d6cf1b858c",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": -400,
+        "y": 1500
+      }
+    },
+    {
+      "id": "601ec76a-4bda-40d0-8451-31d6cf1b858c",
+      "type": "delay",
+      "sourceBlockId": null,
+      "options": {
+        "delay": {
+          "name": "hours-delay",
+          "options": {
+            "hours": 2
+          }
+        },
+        "nextBlockId": "8e83f125-67c6-4af1-ab01-4e250305cafa"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 1150
+      }
+    },
+    {
+      "id": "8e83f125-67c6-4af1-ab01-4e250305cafa",
+      "type": "condition",
+      "sourceBlockId": null,
+      "options": {
+        "conditions": [
+          {
+            "name": "lead-has-tag-condition",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "ec2b3f0d-c0a0-4132-a36e-194ea4c60296"
+              ]
+            }
+          }
+        ],
+        "trueNextBlockId": "",
+        "falseNextBlockId": "2ad0e68a-8135-4fc1-847e-d023e08a7c90"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 1500
+      }
+    },
+    {
+      "id": "2ad0e68a-8135-4fc1-847e-d023e08a7c90",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "4a3d0b75-5507-487a-8fcd-4bd97822075a",
+            "options": {
+              "text": "Oi {leadFirstName}! Não quero que você perca essa chance de conversar direto com o Dr. Wilton.\n\nAs vagas da mentoria são limitadas e os horários de diagnóstico enchem rápido.\n\nSegue o link de novo, é bem rapidinho: 👉 https://cal.com/dr-wilton/diagnostico?name={leadFirstName}&email={leadEmail}",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "",
+        "provider": "",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "b8a72803-1709-4778-b4e5-bae73f6f70c7",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": -400,
+        "y": 2200
+      }
+    },
+    {
+      "id": "b8a72803-1709-4778-b4e5-bae73f6f70c7",
+      "type": "delay",
+      "sourceBlockId": null,
+      "options": {
+        "delay": {
+          "name": "days-delay",
+          "options": {
+            "days": 1
+          }
+        },
+        "nextBlockId": "751e04e0-dc9a-4b02-96bb-1d03ea493ebb"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 1850
+      }
+    },
+    {
+      "id": "751e04e0-dc9a-4b02-96bb-1d03ea493ebb",
+      "type": "condition",
+      "sourceBlockId": null,
+      "options": {
+        "conditions": [
+          {
+            "name": "lead-has-tag-condition",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "ec2b3f0d-c0a0-4132-a36e-194ea4c60296"
+              ]
+            }
+          }
+        ],
+        "trueNextBlockId": "",
+        "falseNextBlockId": "d47a7e34-c20f-459f-aaab-3aecd89c11b9"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 2200
+      }
+    },
+    {
+      "id": "d47a7e34-c20f-459f-aaab-3aecd89c11b9",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "871de1b0-9c1f-4f88-877f-4c571135cbb0",
+            "options": {
+              "text": "{leadFirstName}, passando aqui de novo 👀 Seria uma pena deixar seu diagnóstico com o Dr. Wilton pra trás. Bora marcar?",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "",
+        "provider": "",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "2d8f1709-0ad1-4a4a-9a8e-474320259ecf",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": -400,
+        "y": 2900
+      }
+    },
+    {
+      "id": "2d8f1709-0ad1-4a4a-9a8e-474320259ecf",
+      "type": "delay",
+      "sourceBlockId": null,
+      "options": {
+        "delay": {
+          "name": "days-delay",
+          "options": {
+            "days": 1
+          }
+        },
+        "nextBlockId": "9da55c2d-c9b0-469d-9aeb-eecd3e0b25c6"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 2550
+      }
+    },
+    {
+      "id": "9da55c2d-c9b0-469d-9aeb-eecd3e0b25c6",
+      "type": "condition",
+      "sourceBlockId": null,
+      "options": {
+        "conditions": [
+          {
+            "name": "lead-has-tag-condition",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "ec2b3f0d-c0a0-4132-a36e-194ea4c60296"
+              ]
+            }
+          }
+        ],
+        "trueNextBlockId": "",
+        "falseNextBlockId": "6cbc9a14-89eb-4b28-8c12-3343671aa377"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 2900
+      }
+    },
+    {
+      "id": "6cbc9a14-89eb-4b28-8c12-3343671aa377",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "d6e40568-e534-47f5-8cac-30bbdf07dab8",
+            "options": {
+              "text": "{leadFirstName}, vou encerrar seu atendimento por aqui pra liberar o horário para outro dentista na fila. 🙏\n\nSe mudar de ideia, é só me mandar uma mensagem que eu reservo um novo horário com o Dr. Wilton pra você. Sucesso! 😊",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "",
+        "provider": "",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "9f7d23d5-23d5-4d91-aaf8-25d5099ed6bc",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": -800,
+        "y": 2900
+      }
+    },
+    {
+      "id": "9f7d23d5-23d5-4d91-aaf8-25d5099ed6bc",
+      "type": "action",
+      "sourceBlockId": null,
+      "options": {
+        "actions": [
+          {
+            "name": "move-business-action",
+            "group": "business",
+            "options": {
+              "stageId": "8022c949-47bc-43ef-8f5d-6aa344de58a8"
+            }
+          },
+          {
+            "name": "add-tag-action",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "81db8417-cae7-4291-8098-3c44cb272db8"
+              ],
+              "tagName": ""
+            }
+          },
+          {
+            "name": "lose-business-action",
+            "group": "business",
+            "options": {
+              "lossReasonId": "",
+              "justification": "Breakup automatico - sem resposta"
+            }
+          }
+        ],
+        "nextBlockId": ""
+      },
+      "presentation": {
+        "x": -800,
+        "y": 3250
+      }
+    }
+  ],
+  "tenantId": "69937b06-43cd-40d2-bd39-d3d3c9223283"
+}

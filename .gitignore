@@ -1,0 +1,19 @@
+# dados pessoais de pacientes — reprodutível via scripts/raspar_conversas_datacrazy.py
+data/
+logs/
+*.csv
+
+# ambiente e segredos
+.env
+.env.*
+!.env.example
+.venv/
+venv/
+__pycache__/
+*.pyc
+.DS_Store
+.claude/settings.local.json
+
+# automação gerada com tokens uazapi embutidos — regerar com scripts/gerar_dc_monitor_instancias.py
+dc-monitor/*.dc
+.claude/scheduled_tasks.json

@@ -1,0 +1,166 @@
+{
+  "id": "e630deb4-8d8f-467d-b690-421d59fff139",
+  "createdAt": "2026-07-14T12:00:00.000Z",
+  "name": "MENTORIA · Cal.com Booking Confirmado",
+  "version": 1,
+  "active": false,
+  "notes": [
+    {
+      "id": "4bbe672b-455a-4c91-93fb-9096b7f1dafa",
+      "options": {
+        "text": "📋 MENTORIA · Cal.com Booking Confirmado  [ESQUELETO]\n\nWebhook Cal.com BOOKING_CREATED → confirma agendamento.\n\n⚠️ VALIDAR com um teste real (webhook.site):\n  • path do e-mail: payload.attendees[0].email\n  • mecanismo de associação lead↔webhook no DataCrazy\nConfigurar no Cal.com o webhook apontando p/ a rota HTTP\ndesta automação (copiar a URL gerada no gatilho).",
+        "color": "#fde68a",
+        "width": 560,
+        "height": 360
+      },
+      "presentation": {
+        "x": -760,
+        "y": -260
+      }
+    }
+  ],
+  "blocks": [
+    {
+      "id": "18fb39d9-d98f-4502-9912-d81cc77ae176",
+      "type": "trigger",
+      "sourceBlockId": null,
+      "options": {
+        "triggers": [
+          {
+            "name": "json-http-request-trigger",
+            "group": "http",
+            "options": {
+              "datasourceName": "calcom",
+              "datasourceColor": "#3b82f6"
+            }
+          }
+        ],
+        "nextBlockId": "332cecff-4633-4a04-904e-609e19229ba5"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 0
+      }
+    },
+    {
+      "id": "332cecff-4633-4a04-904e-609e19229ba5",
+      "type": "condition",
+      "sourceBlockId": null,
+      "options": {
+        "conditions": [
+          {
+            "name": "lead-with-email-exists-condition",
+            "group": "lead",
+            "options": {
+              "email": "{email|[calcom]payload.attendees[0].email}"
+            }
+          }
+        ],
+        "trueNextBlockId": "816ab320-acdc-457b-ab31-8f8e9fb23a66",
+        "falseNextBlockId": "3d8bec19-3611-443f-956e-36f453813bc9"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 0
+      }
+    },
+    {
+      "id": "816ab320-acdc-457b-ab31-8f8e9fb23a66",
+      "type": "action",
+      "sourceBlockId": null,
+      "options": {
+        "actions": [
+          {
+            "name": "move-business-action",
+            "group": "business",
+            "options": {
+              "stageId": "cf5d5a94-781b-46ae-ab1e-41171b6cd65e"
+            }
+          },
+          {
+            "name": "add-tag-action",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "ec2b3f0d-c0a0-4132-a36e-194ea4c60296"
+              ],
+              "tagName": ""
+            }
+          },
+          {
+            "name": "remove-tag-action",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "7309d983-fefa-4b83-93be-fe1d7b2131c0"
+              ],
+              "tagName": ""
+            }
+          }
+        ],
+        "nextBlockId": "322e470a-652b-416d-bf98-350f21b00ac5"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 350
+      }
+    },
+    {
+      "id": "322e470a-652b-416d-bf98-350f21b00ac5",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "1b7e6006-f9b2-475e-9ad8-8d3e9874fb47",
+            "options": {
+              "text": "Prontinho, {leadFirstName}! ✅ Sua conversa de diagnóstico com o Dr. Wilton está confirmada.\n\nVou te enviar um lembrete no dia. Qualquer imprevisto, é só me avisar por aqui. Até lá! 😊",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "",
+        "provider": "",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 200,
+        "y": 700
+      }
+    },
+    {
+      "id": "3d8bec19-3611-443f-956e-36f453813bc9",
+      "type": "action",
+      "sourceBlockId": null,
+      "options": {
+        "actions": [
+          {
+            "name": "send-notification-action",
+            "group": "system",
+            "options": {
+              "notification": "Booking Cal.com sem lead correspondente — verificar manualmente",
+              "url": "",
+              "attendantsIds": []
+            }
+          }
+        ],
+        "nextBlockId": ""
+      },
+      "presentation": {
+        "x": -400,
+        "y": 350
+      }
+    }
+  ],
+  "tenantId": "69937b06-43cd-40d2-bd39-d3d3c9223283"
+}

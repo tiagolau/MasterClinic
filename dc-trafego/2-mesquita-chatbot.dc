@@ -1,0 +1,704 @@
+{
+  "id": "3a80d5c7-063e-4931-8996-528624c38e75",
+  "createdAt": "2026-07-29T12:00:00.000Z",
+  "name": "Mesquita · Lead → Avaliação Agendada",
+  "version": 1,
+  "active": false,
+  "notes": [
+    {
+      "id": "cf0572b7-e510-4ec5-b46f-fde50e4aac0f",
+      "options": {
+        "text": "🦷 MESQUITA · LEAD → AVALIAÇÃO AGENDADA\n\nCanal: Mesquita Uazapi\nGatilho: NEGÓCIO CRIADO na etapa Agendamento (Entrada) de 'Funil Principal - Mesquita'\n  (o fluxo anterior já identifica a origem, cria o lead e abre o\n   card — se o card nasceu, o lead mandou mensagem)\n\nESTRATÉGIA: vender a AVALIAÇÃO, não o tratamento.\nO único objetivo é ocupar uma cadeira na agenda.\n\nTRILHO — só avança por BOTÃO:\n  1. Acolhida + 'como podemos cuidar do seu sorriso?'\n       Dor → handoff imediato 🔴\n       Tratamento → o que quer resolver\n       Filho → acolhimento\n  2. VALOR da avaliação (examina, tira dúvidas, monta o plano)\n  3. Fechamento por alternativa: manhã / tarde / tanto faz\n  4. Viabilidade: 'fica tranquilo chegar aqui?'\n       Outra cidade → 'consegue vir?' → Não = PERDIDO\n  5. HANDOFF: permanece em Agendamento (Entrada) + notifica + PARA o bot\n\n⚠️ O BOT NÃO FALA:\n  • convênio / Brasil Sorridente — é OBJEÇÃO, trata só se o\n    lead levantar, e quem trata é o humano\n  • preço, parcelamento — só o doutor, na consulta\n  • nunca manda áudio, nunca agenda sozinho\n\n⚠️ AO IMPORTAR:\n  • selecionar o canal 'Mesquita Uazapi' em TODOS os blocos de mensagem\n  • conferir se o gatilho aponta para a etapa Agendamento (Entrada) de 'Funil Principal - Mesquita'\n  • importar também o .dc de RESGATE desta unidade\n  • ativar só após testar com o próprio número",
+        "color": "#bae6fd",
+        "width": 560,
+        "height": 700
+      },
+      "presentation": {
+        "x": -700,
+        "y": -200
+      }
+    }
+  ],
+  "blocks": [
+    {
+      "id": "80f70350-c4a6-421b-8cc8-822fa1225a8a",
+      "type": "trigger",
+      "sourceBlockId": null,
+      "options": {
+        "triggers": [
+          {
+            "name": "business-created-trigger",
+            "group": "business",
+            "options": {
+              "stageId": "ab4a1b39-acfc-4b0e-b2e4-ea9d27379b4f"
+            }
+          }
+        ],
+        "nextBlockId": "2805d456-12fe-4def-845a-ec7fac0fe089"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 0
+      }
+    },
+    {
+      "id": "42fb2bb7-0e05-4865-b602-fd21bd1e0ffa",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "64023b92-2c03-4e0f-afb3-fdfa76eb2082",
+            "options": {
+              "text": "Enquanto isso, já nos segue no Instagram? 😁\n\n@masterclinicipatinga\n@dradaniellecarvalho\n@drwiltonvargas.dentista",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "WHATSAPP",
+        "provider": "UAZAPI",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 200,
+        "y": 3500
+      }
+    },
+    {
+      "id": "fb32a7ce-6e81-490b-99d4-fd741bfdd70c",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "b8a566be-5fb4-44a5-8983-a892b70465e3",
+            "options": {
+              "text": "Prontinho! ✨\n\nJá passei tudo para a nossa recepção — ela vai confirmar o melhor horário com você aqui mesmo, em instantes.\n\n📍 unidade Mesquita — confirmar endereço com a recepção\n🗓️ Segunda a sexta, de 08:00 às 12:30 e 13:30 às 18:30",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "WHATSAPP",
+        "provider": "UAZAPI",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "42fb2bb7-0e05-4865-b602-fd21bd1e0ffa",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 200,
+        "y": 3150
+      }
+    },
+    {
+      "id": "06376cd9-9586-457d-8e5c-25634b48d989",
+      "type": "action",
+      "sourceBlockId": null,
+      "options": {
+        "actions": [
+          {
+            "name": "add-tag-action",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "7309d983-fefa-4b83-93be-fe1d7b2131c0",
+                "09e51ab5-96ab-4955-bf61-cf13120bd880",
+                "e424604f-2966-4722-9339-c8b35d887a7f"
+              ],
+              "tagName": ""
+            }
+          },
+          {
+            "name": "move-business-action",
+            "group": "business",
+            "options": {
+              "stageId": "ab4a1b39-acfc-4b0e-b2e4-ea9d27379b4f"
+            }
+          },
+          {
+            "name": "send-notification-action",
+            "group": "system",
+            "options": {
+              "notification": "🟢 LEAD QUALIFICADO — unidade Mesquita. Quer avaliação, já escolheu turno e confirmou que consegue vir. Fechar o horário.",
+              "url": "",
+              "attendantsIds": []
+            }
+          },
+          {
+            "name": "stop-chat-automations-action",
+            "group": "messages",
+            "options": {
+              "type": "current-conversation",
+              "instanceId": ""
+            }
+          }
+        ],
+        "nextBlockId": "fb32a7ce-6e81-490b-99d4-fd741bfdd70c"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 2800
+      }
+    },
+    {
+      "id": "e1c6c04f-6ef5-4813-8aea-bb6f62f777fb",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "72f34859-9ffb-45d4-9e78-884e8efc1d73",
+            "options": {
+              "text": "Poxa, dor de dente não dá sossego mesmo 🛑\n\nJá estou avisando a recepção pra te encaixar o quanto antes. Fica aqui comigo que já te respondem!",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "WHATSAPP",
+        "provider": "UAZAPI",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 1100,
+        "y": 1400
+      }
+    },
+    {
+      "id": "86f0d9e2-2dd3-41ab-82fd-2481ce483d23",
+      "type": "action",
+      "sourceBlockId": null,
+      "options": {
+        "actions": [
+          {
+            "name": "add-tag-action",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "cc8ae801-9bd3-413a-b0d6-ff47cb990f84",
+                "09e51ab5-96ab-4955-bf61-cf13120bd880",
+                "7309d983-fefa-4b83-93be-fe1d7b2131c0"
+              ],
+              "tagName": ""
+            }
+          },
+          {
+            "name": "move-business-action",
+            "group": "business",
+            "options": {
+              "stageId": "ab4a1b39-acfc-4b0e-b2e4-ea9d27379b4f"
+            }
+          },
+          {
+            "name": "send-notification-action",
+            "group": "system",
+            "options": {
+              "notification": "🔴 URGÊNCIA / DOR — unidade Mesquita. Encaixar o quanto antes.",
+              "url": "",
+              "attendantsIds": []
+            }
+          },
+          {
+            "name": "stop-chat-automations-action",
+            "group": "messages",
+            "options": {
+              "type": "current-conversation",
+              "instanceId": ""
+            }
+          }
+        ],
+        "nextBlockId": "e1c6c04f-6ef5-4813-8aea-bb6f62f777fb"
+      },
+      "presentation": {
+        "x": 1100,
+        "y": 1050
+      }
+    },
+    {
+      "id": "4a95c6db-88d4-4ed0-bcce-684c2cb23678",
+      "type": "action",
+      "sourceBlockId": null,
+      "options": {
+        "actions": [
+          {
+            "name": "add-tag-action",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "81db8417-cae7-4291-8098-3c44cb272db8"
+              ],
+              "tagName": ""
+            }
+          },
+          {
+            "name": "lose-business-action",
+            "group": "business",
+            "options": {
+              "lossReasonId": "",
+              "justification": "Fora da região — não consegue se deslocar até a unidade"
+            }
+          },
+          {
+            "name": "stop-chat-automations-action",
+            "group": "messages",
+            "options": {
+              "type": "current-conversation",
+              "instanceId": ""
+            }
+          }
+        ],
+        "nextBlockId": ""
+      },
+      "presentation": {
+        "x": 1500,
+        "y": 2800
+      }
+    },
+    {
+      "id": "29b7a340-266d-4cf1-b1c4-0b0ed9838d80",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "340e0c84-0eb5-4f61-a6a1-76ef39795913",
+            "options": {
+              "text": "Imagino, sem problema! 💚 Agradeço demais o seu contato.\n\nSe um dia estiver aqui pela região, vai ser um prazer te atender. Fica com Deus! 🙏🏼",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "WHATSAPP",
+        "provider": "UAZAPI",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "4a95c6db-88d4-4ed0-bcce-684c2cb23678",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 1500,
+        "y": 2450
+      }
+    },
+    {
+      "id": "59bf6624-62c4-4fee-9427-5d43d4c73128",
+      "type": "action",
+      "sourceBlockId": null,
+      "options": {
+        "actions": [
+          {
+            "name": "add-tag-action",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "cc8ae801-9bd3-413a-b0d6-ff47cb990f84"
+              ],
+              "tagName": ""
+            }
+          }
+        ],
+        "nextBlockId": "06376cd9-9586-457d-8e5c-25634b48d989"
+      },
+      "presentation": {
+        "x": 1100,
+        "y": 2800
+      }
+    },
+    {
+      "id": "f54f5ecf-c3d0-4db0-ab06-fb8856fe4f73",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "c45a618a-d440-45e6-911c-fc6e5285439e",
+            "options": {
+              "text": "Entendi! Temos pacientes que vêm de outras cidades, principalmente para implante e prótese — nesses casos a gente organiza o tratamento em menos visitas, pra compensar a viagem.\n\nVocê conseguiria vir até Mesquita (MG)?\n\n👇 *Toque em uma das opções abaixo*",
+              "buttons": [
+                {
+                  "id": "ac578f00-bd54-47bb-9cd2-c73261d82f3a",
+                  "text": "Sim, consigo ir",
+                  "type": "button",
+                  "nextBlockId": "59bf6624-62c4-4fee-9427-5d43d4c73128"
+                },
+                {
+                  "id": "0c114fdc-94ff-4829-afa4-26f619e36fcb",
+                  "text": "Não, é longe demais",
+                  "type": "button",
+                  "nextBlockId": "29b7a340-266d-4cf1-b1c4-0b0ed9838d80"
+                }
+              ],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "WHATSAPP",
+        "provider": "UAZAPI",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 1100,
+        "y": 2450
+      }
+    },
+    {
+      "id": "81585a3d-9c36-43e7-b987-4824cff781d9",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "216a55c6-d9f3-444d-8876-caae270819dc",
+            "options": {
+              "text": "Perfeito! Nossa unidade fica em *unidade Mesquita — confirmar endereço com a recepção* 📍\n\nFica tranquilo pra você chegar até aqui?\n\n👇 *Toque em uma das opções abaixo*",
+              "buttons": [
+                {
+                  "id": "d152cf41-d380-45e5-9f26-833d0f229335",
+                  "text": "Sim, tranquilo",
+                  "type": "button",
+                  "nextBlockId": "06376cd9-9586-457d-8e5c-25634b48d989"
+                },
+                {
+                  "id": "86cfdb8d-781f-4337-b0af-cb92a9edbfd2",
+                  "text": "Sou de outra cidade",
+                  "type": "button",
+                  "nextBlockId": "f54f5ecf-c3d0-4db0-ab06-fb8856fe4f73"
+                }
+              ],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "WHATSAPP",
+        "provider": "UAZAPI",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 200,
+        "y": 2450
+      }
+    },
+    {
+      "id": "9c7de684-4923-471f-93fd-4398aaec7d79",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "5bc26d35-a0b2-4742-9241-f950c9ba9032",
+            "options": {
+              "text": "Você prefere vir de manhã ou à tarde? 🗓️\n\n👇 *Toque em uma das opções abaixo*",
+              "buttons": [
+                {
+                  "id": "d0dcfa7b-2cc5-4356-b387-01d08a1d6763",
+                  "text": "De manhã",
+                  "type": "button",
+                  "nextBlockId": "81585a3d-9c36-43e7-b987-4824cff781d9"
+                },
+                {
+                  "id": "6a639c60-5f0f-48f4-bf46-06423d1b3c52",
+                  "text": "À tarde",
+                  "type": "button",
+                  "nextBlockId": "81585a3d-9c36-43e7-b987-4824cff781d9"
+                },
+                {
+                  "id": "17acbb1c-01e3-444a-906d-864516b015a0",
+                  "text": "Tanto faz",
+                  "type": "button",
+                  "nextBlockId": "81585a3d-9c36-43e7-b987-4824cff781d9"
+                }
+              ],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "WHATSAPP",
+        "provider": "UAZAPI",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 200,
+        "y": 2100
+      }
+    },
+    {
+      "id": "2c6dbd2a-565b-428e-8ee3-6691a99fe70d",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "01564ef1-3ad2-4287-abe1-ca1d29a2ef9e",
+            "options": {
+              "text": "O primeiro passo aqui é uma *avaliação* com o nosso especialista 🦷\n\nEle examina o seu caso com calma, tira todas as suas dúvidas e monta o plano ideal pra você — assim você já sai daqui sabendo exatamente o que precisa ser feito, sem surpresa.\n\nVou reservar um horário pra você, tá bom?",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "WHATSAPP",
+        "provider": "UAZAPI",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "9c7de684-4923-471f-93fd-4398aaec7d79",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 200,
+        "y": 1750
+      }
+    },
+    {
+      "id": "abb3f36d-75d2-446c-8f02-37ca161f39f0",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "4c2dfec7-c034-4c0c-a1be-d65417404917",
+            "options": {
+              "text": "Que bom que você decidiu cuidar disso! 💚\n\nE o que você gostaria de resolver?\n\n👇 *Toque em uma das opções abaixo*",
+              "buttons": [
+                {
+                  "id": "78190d8f-3330-4c3a-90ca-b441ad4f763e",
+                  "text": "Implante ou prótese",
+                  "type": "button",
+                  "nextBlockId": "2c6dbd2a-565b-428e-8ee3-6691a99fe70d"
+                },
+                {
+                  "id": "03e163b6-4c0b-4aa1-9b43-0a6a9865295b",
+                  "text": "Aparelho / ortodontia",
+                  "type": "button",
+                  "nextBlockId": "2c6dbd2a-565b-428e-8ee3-6691a99fe70d"
+                },
+                {
+                  "id": "e8a4bb22-0a47-49cf-9e46-dab7b2287e55",
+                  "text": "Limpeza e avaliação",
+                  "type": "button",
+                  "nextBlockId": "2c6dbd2a-565b-428e-8ee3-6691a99fe70d"
+                }
+              ],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "WHATSAPP",
+        "provider": "UAZAPI",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 600,
+        "y": 1400
+      }
+    },
+    {
+      "id": "87916caf-25f7-4912-96d9-48d92513ef01",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "389bfd9f-5011-422b-89bf-e750beed0bed",
+            "options": {
+              "text": "Que bom! Cuidar desde cedo faz toda a diferença no sorriso dele 🧒✨",
+              "buttons": [],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "WHATSAPP",
+        "provider": "UAZAPI",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "2c6dbd2a-565b-428e-8ee3-6691a99fe70d",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": -300,
+        "y": 1400
+      }
+    },
+    {
+      "id": "529ef4e1-2f82-4f62-8fc1-d2a2d126b378",
+      "type": "chat",
+      "sourceBlockId": null,
+      "options": {
+        "messages": [
+          {
+            "name": "send-text-message",
+            "group": "messages",
+            "stepId": "40979fce-3c6b-4c79-b6d5-7f24ac771fb2",
+            "options": {
+              "text": "Olá! Tudo bem? 😊\n\nAqui é a assistente da *Master Clinic Odontologia Especializada* — unidade Mesquita ✨\n\nQue bom ter você por aqui! Me conta como podemos cuidar do seu sorriso 💚\n\n👇 *Toque em uma das opções abaixo*",
+              "buttons": [
+                {
+                  "id": "07981d23-53a7-4471-9b51-079d0abf0d0e",
+                  "text": "Estou com dor",
+                  "type": "button",
+                  "nextBlockId": "86f0d9e2-2dd3-41ab-82fd-2481ce483d23"
+                },
+                {
+                  "id": "d721b894-a3b9-413b-a1d5-9d1f1997f5c7",
+                  "text": "Quero fazer um tratamento",
+                  "type": "button",
+                  "nextBlockId": "abb3f36d-75d2-446c-8f02-37ca161f39f0"
+                },
+                {
+                  "id": "4a72e803-a21d-4fee-9c60-21fd413bae9a",
+                  "text": "Levar meu filho",
+                  "type": "button",
+                  "nextBlockId": "87916caf-25f7-4912-96d9-48d92513ef01"
+                }
+              ],
+              "breakMessages": true,
+              "breakMessagesIntervalInSeconds": 2
+            }
+          }
+        ],
+        "platform": "WHATSAPP",
+        "provider": "UAZAPI",
+        "timezone": "",
+        "contactId": "",
+        "instanceId": "",
+        "nextBlockId": "",
+        "isAnnotation": false,
+        "scheduledDate": "",
+        "errorNextBlockId": ""
+      },
+      "presentation": {
+        "x": 200,
+        "y": 1050
+      }
+    },
+    {
+      "id": "3b5b2bc1-486f-4182-9dd9-6a21d26593c5",
+      "type": "action",
+      "sourceBlockId": null,
+      "options": {
+        "actions": [
+          {
+            "name": "add-tag-action",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "09e51ab5-96ab-4955-bf61-cf13120bd880"
+              ],
+              "tagName": ""
+            }
+          }
+        ],
+        "nextBlockId": "529ef4e1-2f82-4f62-8fc1-d2a2d126b378"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 700
+      }
+    },
+    {
+      "id": "2805d456-12fe-4def-845a-ec7fac0fe089",
+      "type": "condition",
+      "sourceBlockId": null,
+      "options": {
+        "conditions": [
+          {
+            "name": "lead-has-tag-condition",
+            "group": "lead",
+            "options": {
+              "tagIds": [
+                "7309d983-fefa-4b83-93be-fe1d7b2131c0"
+              ]
+            }
+          }
+        ],
+        "trueNextBlockId": "",
+        "falseNextBlockId": "3b5b2bc1-486f-4182-9dd9-6a21d26593c5"
+      },
+      "presentation": {
+        "x": 200,
+        "y": 350
+      }
+    }
+  ],
+  "tenantId": "69937b06-43cd-40d2-bd39-d3d3c9223283"
+}
